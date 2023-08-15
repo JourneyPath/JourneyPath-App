@@ -3,8 +3,11 @@ import React from "react";
 
 const Welcome = () => {
     return (
-        <div>
-            Welcome! your journey is under construction!
+        <div className="container">
+            <section>
+                <h2>Welcome!</h2>
+                <p>Let us find the path for your journey.</p>
+            </section>
         </div>
     )
 }

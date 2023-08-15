@@ -21,16 +21,18 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
+    <div className="container">
       {error && <p>{error}</p>}
-      <form onSubmit={handleSignUp}>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
+      <form  className="formContainer" onSubmit={handleSignUp}>
+        <h2>Sign Up</h2>
+        <div className="formElement">  
+          <label>Email:</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className="formElement">  
+          <label>Password:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
         <button type="submit">Sign Up</button>
       </form>
     </div>
