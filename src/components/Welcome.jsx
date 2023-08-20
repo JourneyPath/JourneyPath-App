@@ -2,10 +2,11 @@ const Welcome = () => {
    
 
     return (
-        <div>
-            <div>
-                Welcome! your journey is under construction!
-            </div>
+        <div className="container">
+            <section>
+                <h2>Welcome!</h2>
+                <p>Let us find the path for your journey.</p>
+            </section>
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
 import {Routes, Route, Link} from "react-router-dom"
-import './App.css'
 import Welcome from './components/Welcome'
 import UserPrompt from './components/UserPrompt'
 
@@ -13,12 +12,11 @@ function App() {
         <div>
           Logo
         </div>
-        <div>
-          <Link to='/'><div>Home</div></Link>
-          <Link to='/login'><div>login</div></Link>
-          <Link to='/SignUp'><div>Sign Up</div></Link>
-          <Link to='/actionplan'><div>Get Started</div></Link>
-        </div>
+        <ul>
+          <Link to='/' className="navLink">Home</Link>
+          <Link to='/login' className="navLink">login</Link>
+          <Link to='/SignUp' className="navLink">Sign Up</Link>
+        </ul>
       </nav>
       <main>
         <Routes>
