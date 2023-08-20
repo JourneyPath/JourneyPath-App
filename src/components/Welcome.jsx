@@ -1,7 +1,6 @@
-import React from "react";
-
-
 const Welcome = () => {
+   
+
     return (
         <div className="container">
             <section>

@@ -16,7 +16,6 @@ const LoginForm = () => {
         // You can add your authentication logic here
         // For this example, let's just log the values to the console
         console.log("Email:", email);
-        console.log("Password:", password);
         // Sign in
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
