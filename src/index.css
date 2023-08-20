@@ -140,12 +140,29 @@ nav{
   padding: 10px;
 }
 
-.bottom-section{
+.promptForm-shell{
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.promptForm-shell form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.promptForm-mainWrapper {
+  width: 30%
+}
+
+.promptForm-wrapper input {
+  width: 100%;
+  text-align: center;
 }
 
 .input-container{

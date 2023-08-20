@@ -5,6 +5,7 @@ const UserPrompt = () => {
     const [ message, setMessage ] = useState(null)
     const [ previousChats, setPreviousChats ] = useState([])
     const [ currentTitle, setCurrentTitle ] = useState(null)
+    const [ parsedResponse, setParsedResponse ] = useState({})
     
     const createNewChat = () => {
         setMessage(null)
@@ -37,7 +38,11 @@ const UserPrompt = () => {
             const data = await response.json()
             console.log('this is the response on the front', data)
             console.log('this is the data.choices', data.choices[0].message.content)
-            setMessage(data.choices[0].message)
+            const parsedResponseData = JSON.parse(data.choices[0].message.content)
+            console.log('this is the parsed response', parsedResponseData)
+            // setMessage(data.choices[0].message)
+            setParsedResponse(parsedResponseData)
+            setMessage(parsedResponseData)
 
         } catch (error) {
             console.error(error)
@@ -67,7 +72,7 @@ const UserPrompt = () => {
         }
     }, [message, currentTitle])
 
-    const currentChat = previousChats.filter(previousChat => previousChat.title === currentTitle)
+    // const currentChat = previousChats.filter(previousChat => previousChat.title === currentTitle)
     const uniqueTitles = Array.from(new Set(previousChats.map(previousChat => previousChat.title)))
     
   return (
@@ -83,12 +88,31 @@ const UserPrompt = () => {
         </section>
 
         <section className='main'>
-            <h1>Get Started Here</h1>
-            <ul className='feed'>
-                {currentChat.map((chatMessage, index) => <li key={index}>
-                    <p className='role'>{chatMessage.role}</p>
-                    <p>{chatMessage.content}</p>
-                </li> )}
+                <h1>Get Started Here</h1>
+                <ul className='feed'>
+                {Object.entries(parsedResponse).map(([key, value], index) => (
+                    <li key={index}>
+                        {key === 'tasks' ? (
+                            <div>
+                                <p className='role'>Tasks:</p>
+                                <ul>
+                                    {value.map((task, taskIndex) => (
+                                        <li key={taskIndex}>
+                                            <p>Title: {task.title}</p>
+                                            <p>Start Date: {task.start_date}</p>
+                                            <p>End Date: {task.end_date}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ) : (
+                            <div>
+                                <p className='role'>{key}</p>
+                                <p>{value}</p>
+                            </div>
+                        )}
+                    </li>
+                ))}
             </ul>
             <div className='bottom-section'>
                 <div className='input-container'>
