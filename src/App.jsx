@@ -17,12 +17,6 @@ function App() {
           <Link to='/login' className="navLink">login</Link>
           <Link to='/SignUp' className="navLink">Sign Up</Link>
         </ul>
-        <div>
-          <Link to='/'><div>Home</div></Link>
-          <Link to='/login'><div>login</div></Link>
-          <Link to='/SignUp'><div>Sign Up</div></Link>
-          <Link to='/actionplan'><div>Get Started</div></Link>
-        </div>
       </nav>
       <main>
         <Routes>
