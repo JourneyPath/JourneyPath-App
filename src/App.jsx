@@ -9,8 +9,8 @@ function App() {
   return (
     <>
       <nav>
-        <div>
-          Logo
+        <div className="navLink"> 
+          JourneyPath
         </div>
         <ul>
           <Link to='/' className="navLink">Home</Link>
