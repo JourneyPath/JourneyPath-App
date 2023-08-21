@@ -6,6 +6,10 @@ const UserPrompt = () => {
     const [ previousChats, setPreviousChats ] = useState([])
     const [ currentTitle, setCurrentTitle ] = useState(null)
     const [ parsedResponse, setParsedResponse ] = useState({})
+    const [ role, setRole ] = useState('')
+    const [ project, setProject ] = useState('')
+    const [ startDate, setStartDate ] = useState('')
+    const [ completionDate, setCompletionDate ] = useState('')
     
     const createNewChat = () => {
         setMessage(null)
@@ -23,6 +27,15 @@ const UserPrompt = () => {
 
     const getMessages = async () => {
 
+        // const options = {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         message: `You are a ${role} at a car dealership. You have been asked to create an action plan for launching a new model. The start date is 7/4/23 and the new model launch date is 7/4/24. Create an action plan and return your answer so that it can be easily imported into a calendar. I want the output to be in a parsable JSON format with a title, start date, end date, tasks with start and end dates and short task description with key action items for each task.`
+        //     }),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }
         const options = {
             method: 'POST',
             body: JSON.stringify({
@@ -36,8 +49,8 @@ const UserPrompt = () => {
         try {
             const response = await fetch('http://localhost:5000/completions', options)
             const data = await response.json()
-            console.log('this is the response on the front', data)
-            console.log('this is the data.choices', data.choices[0].message.content)
+            // console.log('this is the response on the front', data)
+            // console.log('this is the data.choices', data.choices[0].message.content)
             const parsedResponseData = JSON.parse(data.choices[0].message.content)
             console.log('this is the parsed response', parsedResponseData)
             // setMessage(data.choices[0].message)
@@ -74,6 +87,12 @@ const UserPrompt = () => {
 
     // const currentChat = previousChats.filter(previousChat => previousChat.title === currentTitle)
     const uniqueTitles = Array.from(new Set(previousChats.map(previousChat => previousChat.title)))
+
+    const propertyLabels = {
+        title: 'Project Title:',
+        start_date: 'Project Start Date:',
+        end_date: 'Project End Date:'
+    };
     
   return (
     <div className="app">
@@ -98,16 +117,35 @@ const UserPrompt = () => {
                                 <ul>
                                     {value.map((task, taskIndex) => (
                                         <li key={taskIndex}>
-                                            <p>Title: {task.title}</p>
-                                            <p>Start Date: {task.start_date}</p>
-                                            <p>End Date: {task.end_date}</p>
+                                            <div className='task-wrapper'>
+                                                <p>Title: {task.title}</p>
+                                                <p>Description: {task.description}</p>
+                                                <p>Start Date: {task.start_date}</p>
+                                                <p>End Date: {task.end_date}</p>
+
+                                                {task.action_items && task.action_items.length > 0 && (
+                                                    <ul>
+                                                        {task.action_items.map((actionItem, actionIndex) => (
+                                                            <li key={actionIndex}>
+                                                                <div className='action-item-wrapper'>
+                                                                    <p>Action Item: {actionItem}</p>
+                                                                    <div>
+                                                                        Completed?<input type="checkbox" id="action-item" name="action-item" value="action-item"/>
+                                                                    </div>
+                                                                    <button>Remove Task</button> 
+                                                                </div>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                         ) : (
                             <div>
-                                <p className='role'>{key}</p>
+                                <p className='role'>{propertyLabels[key]}</p>
                                 <p>{value}</p>
                             </div>
                         )}
@@ -119,6 +157,48 @@ const UserPrompt = () => {
                     <input className="prompt-input" value={value} onChange={(e) => setValue(e.target.value)}/>
                     <button id="submit" onClick={getMessages}>Submit</button>
                 </div>
+
+            <div className="input-container">
+            <label htmlFor="roleInput">What is your Role?</label>
+            <input
+                id="roleInput"
+                className="prompt-input"
+                placeholder="e.g. 'retail manager', 'college student', 'actor', etc."
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                type="text"
+            />
+            <label htmlFor="projectInput">Your project or goal</label>
+            <input
+                id="projectInput"
+                className="prompt-input"
+                placeholder="Your project or goal"
+                value={project}
+                onChange={(e) => setProject(e.target.value)}
+                type="text"
+            />
+            <label htmlFor="startDateInput">Desired start date</label>
+            <input
+                id="startDateInput"
+                className="prompt-input"
+                placeholder="Desired start date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                type="text"
+            />
+            <label htmlFor="completionDateInput">Desired completion date</label>
+            <input
+                id="completionDateInput"
+                className="prompt-input"
+                placeholder="Desired completion date"
+                value={completionDate}
+                onChange={(e) => setCompletionDate(e.target.value)}
+                type="text"
+            />
+            <button id="submit" onClick={getMessages}>
+                Submit
+            </button>
+            </div>
                 <p className='info'>Powered by OpenAI ChatGPT 3.5-Turbo</p>
             </div>
         </section>

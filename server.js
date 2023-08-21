@@ -1,5 +1,11 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const API_Key = process.env.VITE_API_KEY
+
 
 const PORT = 5000;
 const app = express();
@@ -7,7 +13,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const API_Key = "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"
 
 app.post('/completions', async (req, res) => {
 
