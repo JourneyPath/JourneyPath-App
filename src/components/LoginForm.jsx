@@ -1,14 +1,13 @@
 import React,{useState} from "react";
 import { app as firebaseApp } from "../../functions/firebaseConfig"
-import { getAuth, 
-         signOut,
+import { getAuth,
          signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginForm = () => {
     const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [authing, setAuthing] = useState(false);
+    //const [authing, setAuthing] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,11 +21,11 @@ const LoginForm = () => {
                 // User signed in successfully
                 var user = userCredential.user;
                 console.log(user)
-                setAuthing(true);
+                //setAuthing(true);
 
             })
             .catch((error) => {
-                setAuthing(false);
+                //setAuthing(false);
                 console.log(error)
                 // Handle error
             });

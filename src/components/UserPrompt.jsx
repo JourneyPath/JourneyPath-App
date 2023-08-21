@@ -47,10 +47,10 @@ const UserPrompt = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/completions', options)
+            const response = await fetch("https://mytps-server.onrender.com/chat", options)
             const data = await response.json()
-            // console.log('this is the response on the front', data)
-            // console.log('this is the data.choices', data.choices[0].message.content)
+            console.log('this is the response on the front', data)
+            console.log('this is the data.choices', data.choices[0].message.content)
             const parsedResponseData = JSON.parse(data.choices[0].message.content)
             console.log('this is the parsed response', parsedResponseData)
             // setMessage(data.choices[0].message)
