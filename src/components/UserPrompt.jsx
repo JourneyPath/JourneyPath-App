@@ -15,9 +15,13 @@ const UserPrompt = () => {
     const [ showModal, setShowModal ] = useState(false)
     const [loading, setLoading] = useState(false); 
 
-    const handleNavigation = () => {
-        console.log('handleNavigation is firing')
-        navigate('/actionplan');
+    // const handleNavigation = () => {
+    //     console.log('handleNavigation is firing');
+    //     navigate('/actionplan');
+    // };
+    
+    const handleNavigation = (messageData) => {
+        navigate('/actionplan', { state: { message: messageData } });
       };
 
     const getMessages = async () => {
@@ -53,7 +57,7 @@ const UserPrompt = () => {
             setParsedResponse(parsedResponseData)
             setMessage(parsedResponseData)
             // setMessage(data.choices[0].message.content)
-            navigate('/actionplan')
+            handleNavigation(parsedResponseData);
         } catch (error) {
             console.error(error)
         } finally {
@@ -134,6 +138,7 @@ const UserPrompt = () => {
         ) : (
             <div className="no-message"></div>
         )}
+
     </div>
   )
 }

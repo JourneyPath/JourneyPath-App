@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 
-const ActionPlanMain = (props) => {
+const ActionPlanMain = ({ message: propMessage }) => {
     const [ value, setValue ] = useState('')
+    const location = useLocation();    
+    const message = location.state && location.state.message;
     // const [ message, setMessage ] = useState(null)
     // const [ previousChats, setPreviousChats ] = useState([])
     // const [ currentTitle, setCurrentTitle ] = useState(null)
     // const [ parsedResponse, setParsedResponse ] = useState({})
     
-    console.log('props', props)
+    console.log('props', message)
     // const createNewChat = () => {
     //     setMessage(null)
     //     setValue('')
@@ -96,7 +99,7 @@ const ActionPlanMain = (props) => {
         <h1>Action Plan</h1>
         {/* <h2>Props: {props.messageFromComponentA}</h2> */}
         <ul className='feed'>
-                {Object.entries(props.messageFromComponentA).map(([key, value], index) => (
+            {message && Object.entries(message).map(([key, value], index) => (
                     <li key={index}>
                         {key === 'tasks' ? (
                             <div>
