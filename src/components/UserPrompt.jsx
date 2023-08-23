@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
+import sampleData from './sampleData';
+import SaveButton from './SaveButton';
 
 const UserPrompt = () => {
+    const [ hide, setHide] = useState(false)
     const [ value, setValue ] = useState('')
     const [ message, setMessage ] = useState(null)
+    const [ sampleMessasge, setSampleMessasge ] = useState("sampleData")
     const [ previousChats, setPreviousChats ] = useState([])
     const [ currentTitle, setCurrentTitle ] = useState(null)
     const [ parsedResponse, setParsedResponse ] = useState({})
@@ -97,7 +101,7 @@ const UserPrompt = () => {
   return (
     <div className="app">
         <section className='side-bar'>
-            <button onClick={createNewChat}>+ New Chat</button>
+            <button onClick={(createNewChat)}>+ New Chat</button>
             <ul className='history'>
                 {uniqueTitles.map((title, index) => <li key={index} onClick={() => handleClick(title)}>{title}</li>)}
             </ul>
@@ -105,9 +109,11 @@ const UserPrompt = () => {
                 <p>Made by the journeyPath team.</p>
             </nav>
         </section>
-
+ 
         <section className='main'>
                 <h1>Get Started Here</h1>
+                <SaveButton theMessage={sampleMessasge}/>
+                <button onClick={() => setHide(!hide)}>Hide prompt</button>
                 <ul className='feed'>
                 {Object.entries(parsedResponse).map(([key, value], index) => (
                     <li key={index}>
@@ -152,57 +158,56 @@ const UserPrompt = () => {
                     </li>
                 ))}
             </ul>
+            {hide? <div>prompt hidden</div>:
             <div className='bottom-section'>
                 <div className='input-container'>
                     <input className="prompt-input" value={value} onChange={(e) => setValue(e.target.value)}/>
                     <button id="submit" onClick={getMessages}>Submit</button>
                 </div>
-
-            <div className="input-container">
-            <label htmlFor="roleInput">What is your Role?</label>
-            <input
-                id="roleInput"
-                className="prompt-input"
-                placeholder="e.g. 'retail manager', 'college student', 'actor', etc."
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                type="text"
-            />
-            <label htmlFor="projectInput">Your project or goal</label>
-            <input
-                id="projectInput"
-                className="prompt-input"
-                placeholder="Your project or goal"
-                value={project}
-                onChange={(e) => setProject(e.target.value)}
-                type="text"
-            />
-            <label htmlFor="startDateInput">Desired start date</label>
-            <input
-                id="startDateInput"
-                className="prompt-input"
-                placeholder="Desired start date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                type="text"
-            />
-            <label htmlFor="completionDateInput">Desired completion date</label>
-            <input
-                id="completionDateInput"
-                className="prompt-input"
-                placeholder="Desired completion date"
-                value={completionDate}
-                onChange={(e) => setCompletionDate(e.target.value)}
-                type="text"
-            />
-            <button id="submit" onClick={getMessages}>
-                Submit
-            </button>
-            </div>
-                <p className='info'>Powered by OpenAI ChatGPT 3.5-Turbo</p>
-            </div>
+                <div className="input-container">
+                    <label htmlFor="roleInput">What is your Role?</label>
+                    <input
+                        id="roleInput"
+                        className="prompt-input"
+                        placeholder="e.g. 'retail manager', 'college student', 'actor', etc."
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        type="text"
+                    />
+                    <label htmlFor="projectInput">Your project or goal</label>
+                    <input
+                        id="projectInput"
+                        className="prompt-input"
+                        placeholder="Your project or goal"
+                        value={project}
+                        onChange={(e) => setProject(e.target.value)}
+                        type="text"
+                    />
+                    <label htmlFor="startDateInput">Desired start date</label>
+                    <input
+                        id="startDateInput"
+                        className="prompt-input"
+                        placeholder="Desired start date"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        type="text"
+                    />
+                    <label htmlFor="completionDateInput">Desired completion date</label>
+                    <input
+                        id="completionDateInput"
+                        className="prompt-input"
+                        placeholder="Desired completion date"
+                        value={completionDate}
+                        onChange={(e) => setCompletionDate(e.target.value)}
+                        type="text"
+                    />
+                    <button id="submit" onClick={getMessages}>
+                        Submit
+                    </button>
+                </div>
+                    <p className='info'>Powered by OpenAI ChatGPT 3.5-Turbo</p>
+            </div>}
         </section>
-    
     </div>
   )
 }
