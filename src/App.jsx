@@ -2,9 +2,12 @@ import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
 import {Routes, Route, Link} from "react-router-dom"
 import Welcome from './components/Welcome'
-import UserPrompt from './components/UserPrompt'
+import ActionPlanMain from './components/ActionPlanMain'
+import { useState } from 'react'
 
 function App() {
+
+  const [ message, setMessage ] = useState(null)
 
   return (
     <>
@@ -20,10 +23,10 @@ function App() {
       </nav>
       <main>
         <Routes>
-          <Route path='/' element={<Welcome />} />
+          <Route path='/' element={<Welcome setMessage={() => setMessage()} />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/SignUp' element={<SignUp />} />
-          <Route path='/actionplan' element={<UserPrompt />} />
+          <Route path='/actionplan' element={<ActionPlanMain messageFromComponentA={message} />} />
         </Routes>
       </main>
     </>
