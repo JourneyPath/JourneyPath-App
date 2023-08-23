@@ -26,6 +26,7 @@ const SignUp = (props) => {
         setDoc(doc(db, user.uid, "profile"), {
           name: name,
           email: email,
+          id:user.uid
         });
         const profile = {name:name}
         props.setUser(profile)

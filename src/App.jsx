@@ -52,7 +52,7 @@ function App() {
           <Route path='/' element={<Welcome />} />
           <Route path='/login' element={<LoginForm setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
-          <Route path='/actionplan' element={<UserPrompt />} />
+          <Route path='/actionplan' element={<UserPrompt user={user}/>} />
         </Routes>
       </main>
     </>

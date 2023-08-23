@@ -4,15 +4,20 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const SaveButton = (props) => {
     const db = getFirestore(firebaseApp)
-
+    console.log(props.user)
 
     const saveMessage = async (messageToSave) => {
         console.log(messageToSave)
-        await setDoc(doc(db, "cities", "LA"), {
-            name: "Los Angeles",
-            state: "CA",
-            country: "USA"
-          });
+        console.log(props.user)
+        if (props.user) {
+            await setDoc(doc(db, props.user.id, "messageTitle"), {
+                Title: "AP title",
+                startDate: "some date",
+                EndDate: "another date"
+              });
+        } else {
+            console.log("you're not logged in!")
+        }
     }
 
     return (

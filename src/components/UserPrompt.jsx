@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import sampleData from './sampleData';
 import SaveButton from './SaveButton';
 
-const UserPrompt = () => {
+const UserPrompt = (props) => {
     const [ hide, setHide] = useState(false)
     const [ value, setValue ] = useState('')
     const [ message, setMessage ] = useState(null)
@@ -97,7 +97,7 @@ const UserPrompt = () => {
         start_date: 'Project Start Date:',
         end_date: 'Project End Date:'
     };
-    
+    console.log(props, props.user)
   return (
     <div className="app">
         <section className='side-bar'>
@@ -112,7 +112,7 @@ const UserPrompt = () => {
  
         <section className='main'>
                 <h1>Get Started Here</h1>
-                <SaveButton theMessage={sampleMessasge}/>
+                <SaveButton theMessage={sampleMessasge} user={props.user}/>
                 <button onClick={() => setHide(!hide)}>Hide prompt</button>
                 <ul className='feed'>
                 {Object.entries(parsedResponse).map(([key, value], index) => (
