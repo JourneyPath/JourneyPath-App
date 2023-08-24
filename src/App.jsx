@@ -2,11 +2,13 @@ import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
 import {Routes, Route, Link} from "react-router-dom"
 import Welcome from './components/Welcome'
+import ActionPlanMain from './components/ActionPlanMain'
 import UserPrompt from './components/UserPrompt'
 import { useState } from 'react'
 import { app as firebaseApp, auth} from "../functions/firebaseConfig"
 import { signOut } from 'firebase/auth'
 import 'firebase/auth';
+
 
 function App() {
   const [loggedIn, setloggedIn] = useState(false)
@@ -52,7 +54,7 @@ function App() {
           <Route path='/' element={<Welcome />} />
           <Route path='/login' element={<LoginForm setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
-          <Route path='/actionplan' element={<UserPrompt user={user}/>} />
+          <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />
         </Routes>
       </main>
     </>

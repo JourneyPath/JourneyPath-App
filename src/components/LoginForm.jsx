@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import {useState} from "react";
 import { app as firebaseApp } from "../../functions/firebaseConfig"
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth,
