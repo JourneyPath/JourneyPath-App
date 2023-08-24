@@ -6,7 +6,7 @@ const UserPrompt = (props) => {
     const [ hide, setHide] = useState(false)
     const [ value, setValue ] = useState('')
     const [ message, setMessage ] = useState(null)
-    const [ sampleMessasge, setSampleMessasge ] = useState("sampleData")
+    const [ sampleMessasge, setSampleMessasge ] = useState(sampleData)
     const [ previousChats, setPreviousChats ] = useState([])
     const [ currentTitle, setCurrentTitle ] = useState(null)
     const [ parsedResponse, setParsedResponse ] = useState({})

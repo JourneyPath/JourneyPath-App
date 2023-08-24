@@ -36,7 +36,7 @@ function App() {
           JourneyPath
         </div>
         <ul>
-          {loggedIn ? <div>Hi {user.name}</div> : <div>Welcome!</div>}
+          {loggedIn ? <div className="loggedIn">Hi {user.name}</div> : <div className="loggedIn">Welcome!</div>}
           <Link to='/' className="navLink">Home</Link>
           {
             loggedIn ? <Link to='/' onClick={handleSignOut} className="navLink"> Sign Out</Link>:
