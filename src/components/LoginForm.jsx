@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import {useState} from "react";
 import { app as firebaseApp } from "../../functions/firebaseConfig"
 import { getAuth,
          signInWithEmailAndPassword } from "firebase/auth";

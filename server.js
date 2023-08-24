@@ -1,3 +1,4 @@
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -33,7 +34,7 @@ app.post('/completions', async (req, res) => {
     try {
         const response = await fetch ("https://api.openai.com/v1/chat/completions", options)
         const data = await response.json()
-        console.log("this is the response back", data)
+        // console.log("this is the response back", data)
         res.send(data)
     } catch (error) {
         console.error(error);
