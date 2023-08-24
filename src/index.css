@@ -102,6 +102,12 @@ nav > ul {
   border: 1px solid black;
 }
 
+.loggedIn {
+  align-self: center;
+  color: #E8F1F2;
+  font-weight: bolder;
+}
+
 .app{
   background-color: #ffffff;
   display: flex;

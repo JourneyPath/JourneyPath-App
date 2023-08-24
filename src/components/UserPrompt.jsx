@@ -1,10 +1,12 @@
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingModal from './LoadingModal';
 import ActionPlanMain from './ActionPlanMain';
+import SaveButton from './SaveButton';
 
-const UserPrompt = () => {
-    const navigate = useNavigate();
+const UserPrompt = (props) => {
+    const [ hide, setHide] = useState(false)
+    const [ value, setValue ] = useState('')
     const [ message, setMessage ] = useState(null)
     const [ parsedResponse, setParsedResponse ] = useState({})
     const [ role, setRole ] = useState('')
@@ -49,10 +51,12 @@ const UserPrompt = () => {
         }
     }
 
+
   return (
     <div className="app">
         <section className='main'>
             <h1 className='getting-started-header'>Get Started Here</h1>
+
 
             <div className='bottom-section'>
 
@@ -98,6 +102,7 @@ const UserPrompt = () => {
                     </button>
                 </div>
 
+
                 <p className='info'>Powered by OpenAI ChatGPT 3.5-Turbo</p>
 
             </div>
@@ -117,7 +122,6 @@ const UserPrompt = () => {
         ) : (
             <div className="no-message"></div>
         )}
-
     </div>
   )
 }
