@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import sampleData from './sampleData';
 import SaveButton from './SaveButton';
 
 const UserPrompt = (props) => {
     const [ hide, setHide] = useState(false)
     const [ value, setValue ] = useState('')
     const [ message, setMessage ] = useState(null)
-    const [ sampleMessasge, setSampleMessasge ] = useState(sampleData)
     const [ previousChats, setPreviousChats ] = useState([])
     const [ currentTitle, setCurrentTitle ] = useState(null)
     const [ parsedResponse, setParsedResponse ] = useState({})
@@ -112,7 +110,7 @@ const UserPrompt = (props) => {
  
         <section className='main'>
                 <h1>Get Started Here</h1>
-                <SaveButton theMessage={sampleMessasge} user={props.user}/>
+                <SaveButton theMessage={message} user={props.user}/>
                 <button onClick={() => setHide(!hide)}>Hide prompt</button>
                 <ul className='feed'>
                 {Object.entries(parsedResponse).map(([key, value], index) => (
