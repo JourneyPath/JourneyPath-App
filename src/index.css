@@ -65,6 +65,12 @@ nav > ul {
   align-items: center;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
