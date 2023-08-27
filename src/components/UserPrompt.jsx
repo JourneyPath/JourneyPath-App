@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingModal from './LoadingModal';
 import ActionPlanMain from './ActionPlanMain';
 import SaveButton from './SaveButton';
 
 const UserPrompt = (props) => {
+    const navigate = useNavigate();
     const [ hide, setHide] = useState(false)
     const [ value, setValue ] = useState('')
     const [ message, setMessage ] = useState(null)
