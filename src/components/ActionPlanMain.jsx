@@ -57,7 +57,7 @@ const ActionPlanMain = ({ message: propMessage }) => {
                                         {value.map((task, taskIndex) => (
                                             <li key={taskIndex} className="task-wrapper-li">
                                                 <div className="task-wrapper">
-                                                    <p>Step {taskIndex + 1}: {task.description}</p>
+                                                    <h3 className='task-header'>Step {taskIndex + 1}: {task.description}</h3>
                                                     <p>Start Date: {task.start_date}</p>
                                                     <p>End Date: {task.end_date}</p>
 
@@ -73,24 +73,30 @@ const ActionPlanMain = ({ message: propMessage }) => {
                                                                     <li key={actionIndex}>
                                                                         <div className="action-item-wrapper">
                                                                             <p>Action Item: {actionItem}</p>
-                                                                            <div>
-                                                                                Completed?
+                                                                            <div className="tasks-button-group">
+                                                                                <label className="checkbox-label" htmlFor={`action-item-${taskIndex}-${actionIndex}`}>
+                                                                                    Completed?
+                                                                                </label>
                                                                                 <input
+                                                                                    className="checkbox-input"
                                                                                     type="checkbox"
                                                                                     id={`action-item-${taskIndex}-${actionIndex}`}
                                                                                     name={`action-item-${taskIndex}-${actionIndex}`}
-                                                                                    checked={
-                                                                                        completedItems[taskIndex]?.[actionIndex]
-                                                                                    }
+                                                                                    checked={completedItems[taskIndex]?.[actionIndex]}
                                                                                     // onChange={() =>
-                                                                                    //     toggleItemCompletion(
-                                                                                    //         taskIndex,
-                                                                                    //         actionIndex
-                                                                                    //     )
+                                                                                    //   toggleItemCompletion(
+                                                                                    //     taskIndex,
+                                                                                    //     actionIndex
+                                                                                    //   )
                                                                                     // }
                                                                                 />
+                                                                                <button
+                                                                                    className="remove-button"
+                                                                                    onClick={() => removeActionItem(taskIndex, actionIndex)}
+                                                                                >
+                                                                                    Remove Task
+                                                                                </button>
                                                                             </div>
-                                                                           <button onClick={() => removeActionItem(taskIndex, actionIndex)}>Remove Task</button>
                                                                         </div>
                                                                     </li>
                                                                 ))}

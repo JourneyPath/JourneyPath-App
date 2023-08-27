@@ -256,98 +256,140 @@ nav > ul {
 }
 
 .feed li {
-  margin-bottom: 25px;
-  padding: 25px;
-  border: 2px solid #34495e; 
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.role {
+/* Task list styles */
+.task-wrapper-main {
+  padding: 10px 0;
+}
+
+.task-wrapper-ul {
+  list-style: none;
+  padding: 0;
+}
+
+.task-wrapper-li {
+  margin: 10px 0;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-wrapper ul{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-content: center;
+}
+
+.task-wrapper li{
+  list-style-type: none;;
+}
+
+.task-header{
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 12px;
   color: #2c3e50; 
 }
 
-.task-wrapper-main{
-  width: 90%;
-}
-
-.task-wrapper-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.task-wrapper-li {
-  margin-bottom: 20px;
-}
-
-.task-wrapper li{
-  border: 2px solid blue;
-}
-
-.task-wrapper {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
+/* Button styles */
 .toggle-button {
-  margin: 10px 0;
-  padding: 10px;
+  background-color: #fff;
   border: none;
-  border-radius: 5px;
-  background-color: transparent;
-  color: #000000;
   cursor: pointer;
-  font-size: 25px;
-  transition: background-color 0.3s;
+  font-size: 18px;
 }
 
-.task-wrapper p {
-  margin: 10px 0;
-  color: #444;
-}
-
-.task-wrapper p:first-child {
-  font-weight: 600;
-}
-
-.task-wrapper p:nth-child(odd) {
-  color: #666;
-}
-
-ul ul {
-  list-style: none;
-  padding-left: 20px;
-}
-
-ul ul li {
-  margin: 10px 0;
-  padding: 0;
-  border: none;
-  box-shadow: none;
-}
-
-.action-items-dropdown {
-  list-style-type: none;
-  padding: 0;
-}
-
-.action-item-dropdown-toggle {
-  cursor: pointer;
-}
-
-.action-items-list {
-  display: none;
-}
-
+/* Action item styles */
 .action-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.action-item-wrapper p {
+  margin: 0;
+}
+
+.checkbox-label {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.checkbox-label:hover {
+  text-decoration: underline;
+}
+
+.checkbox-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #999;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.checkbox-input:checked {
+  border-color: green;
+  background-color: green;
+}
+
+.action-item-wrapper button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+
+.tasks-button-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-top: 10px;
 }
 
-.action-item-dropdown-toggle.active .action-items-list {
-  display: block;
+/* Role label styles */
+.role {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.remove-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.remove-button:hover {
+  background-color: #d32f2f;
+}
+
+.remove-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.3);
+}
+
+.remove-button:active {
+  transform: scale(0.95);
 }
 
 /* User Prompt Modal (Loading Icon) Styling */
