@@ -1,5 +1,121 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router';
+import {
+    PDFDownloadLink,
+    Document,
+    Page,
+    Text,
+    StyleSheet,
+} from '@react-pdf/renderer';
+
+const styles = StyleSheet.create({
+    page: {
+        fontFamily: 'Helvetica',
+        backgroundColor: '#FFFFFF',
+        padding: 40,
+    },
+    centeredTitle: {
+        fontSize: 24,
+        textAlign: 'center',
+        marginBottom: 20,
+    },
+    sectionHeading: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    taskStep: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        textDecoration: 'underline',
+    },
+    actionItem: {
+        marginLeft: 20,
+    },
+    content: {
+        marginBottom: 10,
+    },
+    text: {
+        fontSize: 12,
+    },
+});
+
+const ActionPlanPDF = ({ message }) => {
+
+    const propertyLabels = {
+        title: 'Project Title:',
+        start_date: 'Project Start Date:',
+        end_date: 'Project End Date:'
+    };
+
+    return (
+        <PDFDownloadLink
+            document={
+                <Document>
+                    <Page size="A4" style={styles.page}>
+                        <Text style={styles.centeredTitle}>Action Plan</Text>
+                        {Object.entries(message).map(([key, value], index) => (
+                            <React.Fragment key={index}>
+                                {key === 'tasks' ? (
+                                    <React.Fragment>
+                                        <Text style={styles.sectionHeading}>
+                                            Tasks:
+                                        </Text>
+                                        {value.map((task, taskIndex) => (
+                                            <React.Fragment key={taskIndex}>
+                                                <Text style={styles.taskStep}>
+                                                    Step {taskIndex + 1}:
+                                                    {task.description}
+                                                </Text>
+                                                <Text style={styles.content}>
+                                                    Start Date: {task.start_date}
+                                                </Text>
+                                                <Text style={styles.content}>
+                                                    End Date: {task.end_date}
+                                                </Text>
+                                                {task.action_items &&
+                                                    task.action_items.length > 0 && (
+                                                        <React.Fragment>
+                                                            <Text style={styles.content}>
+                                                                Action Items:
+                                                            </Text>
+                                                            <ul>
+                                                                {task.action_items.map((actionItem, actionIndex) => (
+                                                                    <li key={actionIndex}>
+                                                                        <Text style={styles.actionItem}>
+                                                                            - {actionItem}
+                                                                        </Text>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </React.Fragment>
+                                                    )}
+                                            </React.Fragment>
+                                        ))}
+                                    </React.Fragment>
+                                ) : (
+                                    <React.Fragment>
+                                        <Text style={styles.sectionHeading}>
+                                            {propertyLabels[key]}
+                                        </Text>
+                                        <Text style={styles.text}>{value}</Text>
+                                    </React.Fragment>
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </Page>
+                </Document>
+            }
+            fileName="action_plan.pdf"
+        >
+            {({ blob, url, loading, error }) =>
+                loading ? 'Generating PDF...' : 'Download PDF'
+            }
+        </PDFDownloadLink>
+    );
+};
+
 
 const ActionPlanMain = ({ message: propMessage }) => {
     const location = useLocation();    
@@ -46,6 +162,7 @@ const ActionPlanMain = ({ message: propMessage }) => {
     return (
         <div className="app">
             <h1>Action Plan</h1>
+            <ActionPlanPDF message={message} />
             <ul className="feed">
                 {message &&
                     Object.entries(message).map(([key, value], index) => (
@@ -116,6 +233,7 @@ const ActionPlanMain = ({ message: propMessage }) => {
                         </li>
                     ))}
             </ul>
+
         </div>
     );
 }

@@ -250,8 +250,9 @@ nav > ul {
 .feed {
   list-style: none;
   padding: 0;
-  max-height: 1000px;
+  /* max-height: 800px; */
   /* overflow-y: auto; */
+  height: 90%;
   width: 90%;
 }
 
