@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { app as firebaseApp } from "../../functions/firebaseConfig"
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { updateProfile } from 'firebase/auth';
 import {createUserWithEmailAndPassword,
         getAuth,
        } from 'firebase/auth';
@@ -22,15 +23,17 @@ const SignUp = (props) => {
         // User registered successfully
         var user = userCredential.user;
         // Save user data in the database
-        console.log(user)
-        setDoc(doc(db, user.uid, "profile"), {
-          name: name,
-          email: email,
-          id:user.uid
+        updateProfile(auth.currentUser, {
+            displayName: name
+        }).then(() => {
+            console.log('Display name set successfully');
+        }).catch(error => {
+            console.log('Error setting display name:', error);
         });
-        const profile = {name:name}
-        props.setUser(profile)
-        props.loggedIn()
+        console.log(user)
+        //const profile = {name:name}
+        // props.setUser(profile)
+        // props.loggedIn()
       })
     } catch (err) {
       setError(err.message);
