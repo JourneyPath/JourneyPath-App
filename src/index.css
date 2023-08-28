@@ -366,3 +366,48 @@ ul ul li {
   100% { transform: rotate(360deg); }
 }
 
+/* Dashboard CSS */
+
+.dashContainer,.statsContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  border-radius: 4px;
+  height: 50vh;
+}
+
+.statsContainer {
+  justify-content: space-around;
+  
+}
+
+.statsOuterContainer {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1em;
+  border-radius: 4px;
+  background-color: #E8F1F2;
+  border: .5em solid #7A9E7E;
+  color:#331832;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 1em;
+}
+
+.existingPlans {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2em;
+  border-radius: 4px;
+  background-color: #E8F1F2;
+  border: .5em solid #7A9E7E;
+  color:#331832;
+}

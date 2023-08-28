@@ -4,6 +4,7 @@ import {Routes, Route, Link} from "react-router-dom"
 import Welcome from './components/Welcome'
 import ActionPlanMain from './components/ActionPlanMain'
 import UserPrompt from './components/UserPrompt'
+import Dashboard from './components/Dashboard'
 import { useState } from 'react'
 import { app as firebaseApp, auth} from "../functions/firebaseConfig"
 import { signOut } from 'firebase/auth'
@@ -41,7 +42,11 @@ function App() {
           {loggedIn ? <div className="loggedIn">Hi {user.name}</div> : <div className="loggedIn">Welcome!</div>}
           <Link to='/' className="navLink">Home</Link>
           {
-            loggedIn ? <Link to='/' onClick={handleSignOut} className="navLink"> Sign Out</Link>:
+            loggedIn ? 
+            <>
+            <Link to='/dasboard' onClick={handleSignOut} className="navLink"> Dashboard</Link>
+            <Link to='/' onClick={handleSignOut} className="navLink"> Sign Out</Link>
+            </>:
             <>
               <Link to='/login' className="navLink">login</Link>
               <Link to='/SignUp' className="navLink">Sign Up</Link>
@@ -55,6 +60,7 @@ function App() {
           <Route path='/login' element={<LoginForm setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />
+          <Route path='/dasboard' element={<Dashboard user={user}/>} />
         </Routes>
       </main>
     </>
