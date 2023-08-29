@@ -106,6 +106,17 @@ nav > ul {
   border: 1px solid black;
 }
 
+.startButton {
+  padding:1em;
+  background-color: #E8F1F2;
+  color:#331832;
+  font-weight: bolder;
+  width:30%;
+  margin: 1em auto;
+  border: 1px solid black;
+  border-radius: 4px;;
+}
+
 .loggedIn {
   align-self: center;
   color: #E8F1F2;
@@ -118,8 +129,9 @@ nav > ul {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 100vh;
-  width: 100%;
+  border-radius: 4px;
+  width: 80%;
+  margin: auto;
 }
 
 .side-bar{
@@ -436,7 +448,7 @@ nav > ul {
 
 .dashContainer,.statsContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 1em;
   border-radius: 4px;
   height: 50vh;
