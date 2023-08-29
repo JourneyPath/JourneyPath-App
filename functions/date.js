@@ -4,8 +4,10 @@ const month = date.getMonth() + 1;
 const day = date.getDate();
 const hours = date.getHours();
 const minutes = date.getMinutes();
-const seconds = date.getSeconds();
+// const seconds = date.getSeconds();
 
-export const currentDate = `${year}-${month}-${day}`;
-export const currentTime = `${hours}:${minutes}:${seconds}`;
+const ampm = hours >= 12 ? 'PM' : 'AM';
+const twelveHourFormat = hours % 12 || 12; // Convert 0 to 12
 
+export const currentDate = `${month}-${day}-${year}`;
+export const currentTime = `${twelveHourFormat}:${minutes} ${ampm}`;

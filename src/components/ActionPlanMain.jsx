@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router';
 import ActionPlanPDF from './PDFCreator';
+import { currentDate, currentTime } from '../../functions/date';
 
 const ActionPlanMain = ({ message: propMessage }) => {
     const location = useLocation();    
     const message = location.state && location.state.message;
+    // console.log('currentDate: ', currentDate);
+    // console.log('currentTime: ', currentTime);
 
-    const [completedItems, setCompletedItems] = useState({});
     const [showActionItemsMap, setShowActionItemsMap] = useState({});
+    const [removedActionItems, setRemovedActionItems] = useState([]);
    
     const propertyLabels = {
         title: 'Project Title:',
@@ -15,15 +18,6 @@ const ActionPlanMain = ({ message: propMessage }) => {
         end_date: 'Project End Date:'
     };
     
-    // const toggleItemCompletion = (taskIndex, actionIndex) => {
-    //     setCompletedItems((prevState) => {
-    //         const newState = { ...prevState };
-    //         newState[taskIndex] = newState[taskIndex] || {};
-    //         newState[taskIndex][actionIndex] = !newState[taskIndex][actionIndex];
-    //         return newState;
-    //     });
-    // };
-
     const toggleShowActionItems = (taskIndex) => {
         setShowActionItemsMap((prevState) => ({
             ...prevState,
@@ -32,16 +26,7 @@ const ActionPlanMain = ({ message: propMessage }) => {
     };
 
     const removeActionItem = (taskIndex, actionIndex) => {
-        setCompletedItems((prevState) => {
-            const newState = { ...prevState };
-            if (newState[taskIndex]) {
-                delete newState[taskIndex][actionIndex];
-                if (Object.keys(newState[taskIndex]).length === 0) {
-                    delete newState[taskIndex];
-                }
-            }
-            return newState;
-        });
+        setRemovedActionItems([...removedActionItems, { taskIndex, actionIndex }]);
     };
 
     return (
@@ -71,37 +56,42 @@ const ActionPlanMain = ({ message: propMessage }) => {
                                                         task.action_items &&
                                                         task.action_items.length > 0 && (
                                                             <ul>
-                                                                {task.action_items.map((actionItem, actionIndex) => (
-                                                                    <li key={actionIndex}>
-                                                                        <div className="action-item-wrapper">
-                                                                            <p>Action Item: {actionItem}</p>
-                                                                            <div className="tasks-button-group">
-                                                                                <label className="checkbox-label" htmlFor={`action-item-${taskIndex}-${actionIndex}`}>
-                                                                                    Completed?
-                                                                                </label>
-                                                                                <input
-                                                                                    className="checkbox-input"
-                                                                                    type="checkbox"
-                                                                                    id={`action-item-${taskIndex}-${actionIndex}`}
-                                                                                    name={`action-item-${taskIndex}-${actionIndex}`}
-                                                                                    checked={completedItems[taskIndex]?.[actionIndex]}
-                                                                                    // onChange={() =>
-                                                                                    //   toggleItemCompletion(
-                                                                                    //     taskIndex,
-                                                                                    //     actionIndex
-                                                                                    //   )
-                                                                                    // }
-                                                                                />
-                                                                                <button
-                                                                                    className="remove-button"
-                                                                                    onClick={() => removeActionItem(taskIndex, actionIndex)}
-                                                                                >
-                                                                                    Remove Task
-                                                                                </button>
+                                                                {task.action_items.map((actionItem, actionIndex) => {
+                                                                    const isRemoved = removedActionItems.some(
+                                                                        (removedItem) =>
+                                                                            removedItem.taskIndex === taskIndex &&
+                                                                            removedItem.actionIndex === actionIndex
+                                                                    );
+
+                                                                    if (isRemoved) {
+                                                                        return null; 
+                                                                    }
+
+                                                                    return (
+                                                                        <li key={actionIndex}>
+                                                                            <div className="action-item-wrapper">
+                                                                                <p>Action Item: {actionItem}</p>
+                                                                                <div className="tasks-button-group">
+                                                                                    <label className="checkbox-label" htmlFor={`action-item-${taskIndex}-${actionIndex}`}>
+                                                                                        Completed?
+                                                                                    </label>
+                                                                                    <input
+                                                                                        className="checkbox-input"
+                                                                                        type="checkbox"
+                                                                                        id={`action-item-${taskIndex}-${actionIndex}`}
+                                                                                        name={`action-item-${taskIndex}-${actionIndex}`}
+                                                                                    />
+                                                                                    <button
+                                                                                        className="remove-button"
+                                                                                        onClick={() => removeActionItem(taskIndex, actionIndex)}
+                                                                                    >
+                                                                                        Remove Item
+                                                                                    </button>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </li>
-                                                                ))}
+                                                                        </li>
+                                                                    );
+                                                                })}
                                                             </ul>
                                                         )}
                                                 </div>
@@ -118,7 +108,6 @@ const ActionPlanMain = ({ message: propMessage }) => {
                         </li>
                     ))}
             </ul>
-
         </div>
     );
 }
