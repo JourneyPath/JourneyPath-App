@@ -11,6 +11,7 @@ import 'firebase/auth';
 
 
 function App() {
+  const [loggedIn, setloggedIn] = useState(false)
   const [user, setUser] = useState(false)
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -24,13 +25,7 @@ function App() {
         // User is signed out
         setloggedIn(false)
     }
-});
-
-  const [loggedIn, setloggedIn] = useState(false)
-  //const [user, setUser] = useState(false)
-
-  console.log(user)
-
+  });
 
   const handleLoggedIn = () => {
     setloggedIn(true); 
@@ -45,7 +40,7 @@ function App() {
     }
     setloggedIn(false)
     window.alert("You have been logged out!")
-};
+  };
   
   return (
     <>

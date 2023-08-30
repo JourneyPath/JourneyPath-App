@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useLocation } from 'react-router';
 import ActionPlanPDF from './PDFCreator';
 import { currentDate, currentTime } from '../../functions/date';
+import SaveButton from './SaveButton'
 
-const ActionPlanMain = ({ message: propMessage }) => {
+const ActionPlanMain = ({ message: propMessage },props) => {
     const location = useLocation();    
     const message = location.state && location.state.message;
     // console.log('currentDate: ', currentDate);
@@ -33,6 +34,7 @@ const ActionPlanMain = ({ message: propMessage }) => {
         <div className="app">
             <h1>Action Plan</h1>
             <ActionPlanPDF message={message} />
+            <SaveButton message={message}/>
             <ul className="feed">
                 {message &&
                     Object.entries(message).map(([key, value], index) => (

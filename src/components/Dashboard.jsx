@@ -1,11 +1,27 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import UserPrompt from "./UserPrompt";
-import {
-    getAuth,
-   } from 'firebase/auth';
+import { db, auth } from "../../functions/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
-const Dashboard = (props) => {
-    
+const Dashboard = () => {
+    const collectionRef = collection(db, auth.currentUser.uid);
+    const [plans, setPlans] = useState([])
+    console.log(plans)
+    useEffect(() => {
+        getDocs(collectionRef)
+            .then((snapshot) => {
+                let currentPlans = []
+                snapshot.docs.forEach((doc) => {
+                    currentPlans.push({...doc.data()})
+                })
+                setPlans(currentPlans)
+            })
+            .catch(error => {
+                console.log(error)
+
+            })          
+    },[])
+
     return (
         <>
             <div className="dashContainer">
@@ -13,7 +29,7 @@ const Dashboard = (props) => {
                     <div className="statsContainer">
                         <div className="statItem">
                             <h3>Plans Created</h3>
-                            <div>number #</div>
+                            <div>{plans.length}</div>
                         </div>
                         <div className="statItem">
                             <h3>Plans Finished</h3>
