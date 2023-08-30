@@ -1,50 +1,72 @@
 import {useState} from "react";
+import { auth, googleProvider } from "../../functions/firebaseConfig";
 import { app as firebaseApp } from "../../functions/firebaseConfig"
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { getAuth,
-         signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,
+         signInWithPopup, 
+       } from "firebase/auth";
 
 const LoginForm = (props) => {
-    const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState('')
     const db = getFirestore(firebaseApp)
     //const [authing, setAuthing] = useState(false);
+    console.log('this is props', props)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         // Sign in
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // User signed in successfully
-                setUser(userCredential.user);
-                console.log("user",user,userCredential.uid)
-                //setAuthing(true);
-                if (user && user.uid) {
-                  userProfile()
-                }
-            })
-            .catch((error) => {
-                //setAuthing(false);
-                console.log(error)
-                // Handle error
-            });
-
+        .then((userCredential) => {
+            // User signed in successfully
+            setUser(userCredential.user);
+            console.log('userCredential', userCredential)
+          
+            if (userCredential.user && userCredential.user.uid) {
+                userProfile();
+                props.setUser({ ...userCredential.user }); 
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            // Handle error
+        });
+    
+    
+        console.log('this is user', user)
         // Clear the form
         setEmail("");
         setPassword("");
     };
 
+    const signInWithGoogle = async () => {
+      try {
+        await signInWithPopup(auth, googleProvider);
+        // Call the loggedIn callback function and set the user
+        props.loggedIn();
+        props.setUser(auth.currentUser); // Set the user in the App component
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+
     const userProfile = async () => {
-      const userDataRef = doc(db, user.uid, "profile")
-      const userData = await getDoc(userDataRef)
-        if (userData.exists()) {
-          props.setUser(userData.data())
-          props.loggedIn()
-        }
-    }
+      if (user && user.uid) { // Check if user is defined and has uid
+          const userDataRef = doc(db, "profile", user.uid); // Modify the path as needed
+          console.log('this is user', user)
+          const userData = await getDoc(userDataRef);
+  
+          if (userData.exists()) {
+              props.setUser(userData.data());
+              props.loggedIn();
+          }
+      }
+  };
+  
+  
 
     return (
         <div className="container">
@@ -70,8 +92,10 @@ const LoginForm = (props) => {
             </div>
             
               <button type="submit">Login</button>
-            
+              <p>or</p>
+              <button className="google-signIn-button"onClick={signInWithGoogle}>Sign In With Google</button>
           </form>
+          
     </div>
     )
 }
