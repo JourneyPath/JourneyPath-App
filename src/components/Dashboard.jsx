@@ -1,8 +1,11 @@
 import React from "react";
 import UserPrompt from "./UserPrompt";
+import {
+    getAuth,
+   } from 'firebase/auth';
 
 const Dashboard = (props) => {
-
+    
     return (
         <>
             <div className="dashContainer">
