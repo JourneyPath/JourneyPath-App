@@ -4,12 +4,12 @@ import ActionPlanPDF from './PDFCreator';
 import { currentDate, currentTime } from '../../functions/date';
 import SaveButton from './SaveButton'
 
-const ActionPlanMain = ({ message: propMessage },props) => {
+const ActionPlanMain = ({ message: plan }) => {
     const location = useLocation();    
     const message = location.state && location.state.message;
     // console.log('currentDate: ', currentDate);
     // console.log('currentTime: ', currentTime);
-
+    console.log(message)
     const [showActionItemsMap, setShowActionItemsMap] = useState({});
     const [removedActionItems, setRemovedActionItems] = useState([]);
    

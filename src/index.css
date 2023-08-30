@@ -472,7 +472,7 @@ nav > ul {
   justify-content: space-around;
   padding: 1em;
   border-radius: 4px;
-  height: 50vh;
+  
 }
 
 .statsContainer {
@@ -494,9 +494,14 @@ nav > ul {
 .statItem {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   margin: 0 1em;
+}
+
+.planStat {
+  font-weight: bold;
+  font-size: 48px;
 }
 
 .existingPlans {
@@ -509,4 +514,15 @@ nav > ul {
   background-color: #E8F1F2;
   border: .5em solid #7A9E7E;
   color:#331832;
+}
+
+.planButton {
+  padding:1em;
+  background-color: #E8F1F2;
+  color:#331832;
+  font-weight: bolder;
+  width:90%;
+  margin: 1em auto;
+  border: 1px solid black;
+  border-radius: 4px;;
 }
