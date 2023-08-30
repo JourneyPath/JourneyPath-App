@@ -51,7 +51,7 @@ function App() {
           JourneyPath
         </div>
         <ul>
-        {loggedIn ? <div className="loggedIn">Hi {user.displayName}</div> : <div className="loggedIn">Welcome!</div>}
+        {loggedIn ? <div className="loggedIn">Hi {user.name}</div> : <div className="loggedIn">Welcome!</div>}
 
           <Link to='/' className="navLink">Home</Link>
           {

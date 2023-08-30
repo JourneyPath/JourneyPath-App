@@ -12,7 +12,7 @@ const LoginForm = (props) => {
     const [user, setUser] = useState('')
     const db = getFirestore(firebaseApp)
     //const [authing, setAuthing] = useState(false);
-    console.log('this is props', props)
+    // console.log('this is props', props)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,7 +26,8 @@ const LoginForm = (props) => {
           
             if (userCredential.user && userCredential.user.uid) {
                 userProfile();
-                props.setUser({ ...userCredential.user }); 
+                props.loggedIn();
+                props.setUser(auth.currentUser); 
             }
         })
         .catch((error) => {
@@ -44,9 +45,8 @@ const LoginForm = (props) => {
     const signInWithGoogle = async () => {
       try {
         await signInWithPopup(auth, googleProvider);
-        // Call the loggedIn callback function and set the user
         props.loggedIn();
-        props.setUser(auth.currentUser); // Set the user in the App component
+        props.setUser(auth.currentUser); 
       } catch (error) {
         console.error(error);
       }
