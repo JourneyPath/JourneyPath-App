@@ -29,7 +29,7 @@ const UserPrompt = (props) => {
         const options = {
             method: 'POST',
             body: JSON.stringify({
-                message: `Today's date is ${currentDate} at ${currentTime}.  You are a ${role}. You have been asked to create an action plan for ${project}. The start date is ${startDate} and the ${project} completion must be by ${completionDate}. Create an action plan and return your answer so that it can be easily imported into a calendar. I want the output to be in a parsable JSON format with a title, start date, end date, tasks with start and end dates and short task description with key action items for each task.`
+                message: `Today's date is ${currentDate} at ${currentTime}.  You are a ${role}. You have been asked to create an action plan for ${project}. The start date is ${startDate} and the ${project} completion must be by ${completionDate}. Create an action plan and return your answer so that it can be easily imported into a calendar. I want the output to be in a parsable JSON format with a title, start date (date format: MM/DD/YYYY; time format: hours:minutes in 12 hour format), end date (date format: MM/DD/YYYY; time format: hours:minutes in 12 hour format), tasks with start and end dates and short task description with key action items for each task.`
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -42,6 +42,7 @@ const UserPrompt = (props) => {
             // console.log('this is the response on the front', data)
             // console.log('this is the data.choices', data.choices[0].message.content)
             const parsedResponseData = JSON.parse(data.choices[0].message.content)
+            console.log('this is the parsedResponseData', parsedResponseData)
             setParsedResponse(parsedResponseData)
             setMessage(parsedResponseData)
             handleNavigation(parsedResponseData);
