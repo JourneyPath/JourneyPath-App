@@ -477,7 +477,7 @@ nav > ul {
 
 .statsContainer {
   justify-content: space-around;
-  
+  height:100%;
 }
 
 .statsOuterContainer {
@@ -494,7 +494,7 @@ nav > ul {
 .statItem {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin: 0 1em;
 }
@@ -524,5 +524,6 @@ nav > ul {
   width:90%;
   margin: 1em auto;
   border: 1px solid black;
-  border-radius: 4px;;
+  border-radius: 4px;
+  text-decoration: none;
 }
