@@ -58,7 +58,7 @@ nav > ul {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 55%;
+  padding:2em;
   width: 90%;
   /* background-color: #f0f0f0; */
   background-color: #333333;
@@ -88,7 +88,9 @@ nav > ul {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-content: center;
   align-items: center;
+  height: 100vh; 
 }
 
 .container {
