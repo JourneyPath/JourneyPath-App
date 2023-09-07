@@ -45,11 +45,11 @@ function App() {
   return (
     <>
       <nav>
-        <div className="navLink"> 
-          JourneyPath
-        </div>
+        <h1 className="navLink"> 
+          hyperDrive plans
+        </h1>
         <ul>
-          {loggedIn ? <div className="loggedIn">Hi {user.displayName}</div> : <div className="loggedIn">Welcome!</div>}
+          {loggedIn ? <div className="loggedIn">Hi {user.displayName}</div> : null}
           <Link to='/' className="navLink">Home</Link>
           {
             loggedIn ? 
@@ -74,6 +74,11 @@ function App() {
           <Route path='/dasboard' element={<Dashboard />} />
         </Routes>
       </main>
+      <footer>
+        <p>
+        © 2023 hyperDrive Plans. All rights reserved.
+        </p>
+      </footer>
     </>
   )
 }
