@@ -8,9 +8,10 @@ import { useState } from 'react'
 import { app as firebaseApp, auth} from "../functions/firebaseConfig"
 import { signOut, onAuthStateChanged } from 'firebase/auth'
 import 'firebase/auth';
-
+import Test from './components/test'
 
 function App() {
+  const [loggedIn, setloggedIn] = useState(false)
   const [user, setUser] = useState(false)
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -24,13 +25,7 @@ function App() {
         // User is signed out
         setloggedIn(false)
     }
-});
-
-  const [loggedIn, setloggedIn] = useState(false)
-  //const [user, setUser] = useState(false)
-
-  console.log(user)
-
+  });
 
   const handleLoggedIn = () => {
     setloggedIn(true); 
@@ -45,7 +40,7 @@ function App() {
     }
     setloggedIn(false)
     window.alert("You have been logged out!")
-};
+  };
   
   return (
     <>
@@ -72,6 +67,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Welcome />} />
+          <Route path='/test' element={<Test />} />
           <Route path='/login' element={<LoginForm setUser={(el) => setUser(el)} loggedIn={handleLoggedIn} />} />
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />

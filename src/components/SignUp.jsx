@@ -21,19 +21,17 @@ const SignUp = (props) => {
       await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // User registered successfully
-        var user = userCredential.user;
+        const user = userCredential.user;
         // Save user data in the database
         updateProfile(auth.currentUser, {
             displayName: name
         }).then(() => {
             console.log('Display name set successfully');
+            props.setUser(auth.currentUser)
         }).catch(error => {
             console.log('Error setting display name:', error);
         });
         console.log(user)
-        //const profile = {name:name}
-        // props.setUser(profile)
-        // props.loggedIn()
       })
     } catch (err) {
       setError(err.message);
