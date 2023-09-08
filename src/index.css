@@ -27,7 +27,6 @@ nav {
   align-items: center;
   align-content: center;
   background-color: #000000;
-  /* padding: 1em; */
 }
 
 nav h1{
@@ -54,27 +53,23 @@ nav > ul {
   justify-content: space-evenly;
   align-items: center;
   padding:2em;
-  width: auto;
+  width: 80%;
   height: 100%;
-  /* background-color: #f0f0f0; */
   background-color: #333333;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  /* Apply a consistent border-radius */
   border-radius: 10px;
 }
 
-/* Link color for specific elements */
 .main a {
-  color: #84A9C3; /* Link color */
+  color: #84A9C3; 
   text-decoration: underline;
 }
-
-/* Adjust other styles as needed */
 
 .main h1 {
   color: #f0f0f0;
   font-size: 3em;
   font-family: 'Playfair Display', serif;
+  margin-bottom: 5%;
 }
 
 .welcome-container {
@@ -120,7 +115,6 @@ nav > ul {
   font-weight: 400;
   padding: 2em;
   margin-bottom: 3em;
-  /* background-color: #60e5ee; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
   color:rgb(220, 243, 244);
 }
@@ -136,6 +130,7 @@ nav > ul {
   border: 1px solid #000000;
   border-radius: 4px;
   text-align: center;
+  cursor: pointer;
 }
 
 .modal-background {
@@ -156,8 +151,8 @@ nav > ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
-  max-width: 600px; 
+  width: 100%;
+  max-width: 800px; 
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
@@ -249,30 +244,6 @@ footer{
   margin: auto;
 }
 
-/* .side-bar{
-  background-color: #202123;
-  height: 100vh;
-  width: 244px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-}
-
-.side-bar button{
-  border: solid 0.5px rgba(255, 255, 255, 0.5);
-  background-color: transparent;
-  border-radius: 5px;
-  margin: 10px;
-} */
-
-/* nav{
-  border-top: solid 0.5px rgba(255, 255, 255, 0.5);
-  padding: 10px;
-  margin: 10px;
-} */
-
 .history{
   padding:10px;
   margin: 10px;
@@ -361,7 +332,6 @@ footer{
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  /* background-color: #333333; */
   background-color: #f0f0f0;
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);

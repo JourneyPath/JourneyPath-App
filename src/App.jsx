@@ -9,6 +9,7 @@ import { app as firebaseApp, auth} from "../functions/firebaseConfig"
 import { signOut, onAuthStateChanged } from 'firebase/auth'
 import 'firebase/auth';
 import Test from './components/test'
+import Calendar from './components/Calendar'
 
 function App() {
   const [loggedIn, setloggedIn] = useState(false)
@@ -18,9 +19,9 @@ function App() {
         // User is signed in, you can access user data here
         setUser(user)
         setloggedIn(true)
-        console.log(user.uid); // User ID
-        console.log(user.email); // User's email
-        console.log(user.displayName); // User's display name
+        // console.log(user.uid); // User ID
+        // console.log(user.email); // User's email
+        // console.log(user.displayName); // User's display name
     } else {
         // User is signed out
         setloggedIn(false)
@@ -55,6 +56,7 @@ function App() {
             loggedIn ? 
             <>
             <Link to='/dasboard' className="navLink"> Dashboard</Link>
+            <Link to='/calendar' className="calendarLink"> Calendar</Link>
             <Link to='/' onClick={logout} className="navLink"> Sign Out</Link>
             </>:
             <>
@@ -72,6 +74,8 @@ function App() {
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />
           <Route path='/dasboard' element={<Dashboard />} />
+          <Route path='/calendar' element={<Calendar user={user}/>} />
+          <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} />
         </Routes>
       </main>
       <footer>

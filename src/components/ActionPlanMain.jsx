@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useLocation } from 'react-router';
 import ActionPlanPDF from './PDFCreator';
 import { currentDate, currentTime } from '../../functions/date';
-import SaveButton from './SaveButton'
+import SaveButton from './SaveButton';
+import EventScheduler from './EventScheduler';
 
 const ActionPlanMain = ({ message: plan }) => {
     const location = useLocation();    
@@ -35,6 +36,7 @@ const ActionPlanMain = ({ message: plan }) => {
             <h1>Action Plan</h1>
             <ActionPlanPDF message={message} />
             <SaveButton message={message}/>
+            <EventScheduler message={message}/>
             <ul className="feed">
                 {message &&
                     Object.entries(message).map(([key, value], index) => (

@@ -26,10 +26,10 @@ const Welcome = () => {
           hyperDrive plans is a tool to help you accomplish your goals.
           Utilizing AI, you can input who you are, what your goal is, your
           start date, and an end date, and then *voila!* you have a starting
-          point in your beginning your journey to accomplish it!
+          point to begin your journey and accomplish your goal!
         </p>
         <div className="startButton" onClick={openModal}>
-          Let your journey begin!
+          Ready to begin your journey? Click Here!
         </div>
       </div>
 
