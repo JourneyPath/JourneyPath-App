@@ -39,7 +39,7 @@ const UserPrompt = (props) => {
         try {
             const response = await fetch('http://localhost:5000/completions', options)
             const data = await response.json()
-            // console.log('this is the response on the front', data)
+            console.log('this is the response on the front', data)
             // console.log('this is the data.choices', data.choices[0].message.content)
             const parsedResponseData = JSON.parse(data.choices[0].message.content)
             console.log('this is the parsedResponseData', parsedResponseData)
@@ -56,12 +56,12 @@ const UserPrompt = (props) => {
 
 
   return (
-    <div className="app">
-        <section className='main'>
-            <h1 className='getting-started-header'>Get Started Here</h1>
+    <div className="user-prompt-parent-wrapper">
+        <section className='user-prompt-main'>
+            <h1 className='getting-started-header'>Create a New Plan</h1>
 
 
-            <div className='bottom-section'>
+            <div className='user-prompt-bottom-section'>
 
                 <div className="input-container">
                     <label htmlFor="roleInput">What is your Role?</label>

@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
+import OpenAI from 'openai';
 
 dotenv.config();
 const API_Key = process.env.VITE_API_KEY
@@ -181,32 +182,114 @@ app.get('/calendar/fetch_calendar_events', async (req, res) => {
 
 // ****************** OPENAI CHATGPT SERVER INFO ****************** //
 
+const openai = new OpenAI({
+    apiKey: API_Key,
+  });
+  
+  let moderation;
+  
+  async function performModerationCheck(input) {
+    try {
+      moderation = await openai.moderations.create({
+        input: input,
+      });
+      console.log(moderation.results);
+  
+      return moderation;
+    } catch (error) {
+      console.error('Moderation Check Error:', error);
+      return null; 
+    }
+  }
+  
+  app.post('/completions', async (req, res) => {
+    const userMessage = req.body.message;
+  
+    await performModerationCheck(userMessage); 
+    console.log("this is the user message", await performModerationCheck(userMessage))
+    console.log("this is the moderation", moderation)
 
-app.post('/completions', async (req, res) => {
+    if (moderation.flagged) {
+        console.log("in the true statement")
+      res.send('Input does not comply with guidelines');
+    } else {
+        console.log("in the false statement")
 
-    const options = {
+      const options = {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${API_Key}`,
-            'Content-Type': 'application/json',
+          'Authorization': `Bearer ${API_Key}`,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role:"user", content: req.body.message}],
-            temperature: 0.2,
-            // max_tokens: 00,
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: userMessage }],
+          temperature: 0.2,
+          // max_tokens: 00,
         })
-    }
-    
-    try {
-        const response = await fetch ("https://api.openai.com/v1/chat/completions", options)
+      }
+  
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", options)
         const data = await response.json()
-        // console.log("this is the response back", data)
+        console.log("this is the response back", data)
         res.send(data)
-    } catch (error) {
+      } catch (error) {
         console.error(error);
+        res.status(500).json({ error: 'An error occurred while processing your request' });
+      }
     }
-})
+  });
+  
+
+
+
+
+// ************* OLD ****************** //
+
+// const openai = new Openai(API_Key);
+
+// async function openaiModerationCheck() {
+//     try {
+//       const moderation = await openai.moderations.create({
+//         input: "",
+//       });
+  
+//       console.log(moderation.results);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     }
+// }
+
+
+// app.post('/completions', async (req, res) => {
+
+//     const options = {
+//         method: 'POST',
+//         headers: {
+//             'Authorization': `Bearer ${API_Key}`,
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             model: "gpt-3.5-turbo",
+//             messages: [{ role:"user", content: req.body.message}],
+//             temperature: 0.2,
+//             // max_tokens: 00,
+//         })
+//     }
+    
+//     try {
+//         const response = await fetch ("https://api.openai.com/v1/chat/completions", options)
+//         const data = await response.json()
+//         // console.log("this is the response back", data)
+//         res.send(data)
+//     } catch (error) {
+//         console.error(error);
+//     }
+// })
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
