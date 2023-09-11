@@ -5,8 +5,10 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword,
          signInWithPopup, 
        } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = (props) => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState('')
@@ -40,6 +42,7 @@ const LoginForm = (props) => {
         // Clear the form
         setEmail("");
         setPassword("");
+        // navigate("/dasboard");
     };
 
     const signInWithGoogle = async () => {

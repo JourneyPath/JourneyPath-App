@@ -1,20 +1,51 @@
-import { useState } from "react"
-import UserPrompt from "./UserPrompt"
+import { useState } from "react";
+import Modal from "react-modal";
+import UserPrompt from "./UserPrompt";
+
+Modal.setAppElement("#root"); // Set the root element for accessibility
 
 const Welcome = () => {
-   const [showPrompt, setShowPrompt] = useState(false)
+  const [showPrompt, setShowPrompt] = useState(false);
 
-    return (
-        <div className="welcome-container">
-            {showPrompt ? 
-            <UserPrompt /> : 
-            <div className="welcome">
-                <h2>Welcome!</h2>
-                <p>Let us find the path for your journey.</p>
-                <div className="startButton" onClick={() => setShowPrompt(!showPrompt)}>Let your journey begin!</div> 
-            </div>}
+  const openModal = () => {
+    setShowPrompt(true);
+  };
+
+  const closeModal = () => {
+    setShowPrompt(false);
+  };
+
+  return (
+    <div className="welcome-container">
+      <div className="welcome">
+        <div className="welcome-headline">
+          <h2>Welcome!</h2>
+          <p>Let us find the path for your journey.</p>
         </div>
-    )
-}
+        <p className="welcome-about-script">
+          hyperDrive plans is a tool to help you accomplish your goals.
+          Utilizing AI, you can input who you are, what your goal is, your
+          start date, and an end date, and then *voila!* you have a starting
+          point to begin your journey and accomplish your goal!
+        </p>
+        <div className="startButton" onClick={openModal}>
+          Ready to begin your journey? Click Here!
+        </div>
+      </div>
 
-export default Welcome
+        <Modal
+            isOpen={showPrompt}
+            onRequestClose={closeModal}
+            contentLabel="User Prompt Modal"
+            className="modal"
+            overlayClassName="modal-overlay"
+            shouldCloseOnOverlayClick={true} 
+            >
+            <UserPrompt />
+        </Modal>
+
+    </div>
+  );
+};
+
+export default Welcome;
