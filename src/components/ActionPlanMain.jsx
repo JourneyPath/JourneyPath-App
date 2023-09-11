@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router';
 import ActionPlanPDF from './PDFCreator';
 import { currentDate, currentTime } from '../../functions/date';
-import SaveButton from './SaveButton'
+import SaveButton from './SaveButton';
 
 const ActionPlanMain = ({ message: plan }) => {
     const location = useLocation();    
@@ -31,10 +31,12 @@ const ActionPlanMain = ({ message: plan }) => {
     };
 
     return (
-        <div className="app">
-            <h1>Action Plan</h1>
-            <ActionPlanPDF message={message} />
-            <SaveButton message={message}/>
+        <div className="action-plan-parent-wrapper">
+            <h1>Here's Your Action Plan!</h1>
+            <div className='actionPlan-Options'>
+                <ActionPlanPDF message={message} className="action-plan-link"/>
+                <SaveButton message={message}/>
+            </div>
             <ul className="feed">
                 {message &&
                     Object.entries(message).map(([key, value], index) => (
