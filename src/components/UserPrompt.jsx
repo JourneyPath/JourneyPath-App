@@ -48,13 +48,9 @@ const UserPrompt = (props) => {
             const response = await fetch('http://localhost:5000/completions', options);
         
             if (response.status === 400) {
-                // Handle the 400 error by extracting the error message from the response
-                const errorData = await response.json(); // Assuming your server sends JSON error messages
+                const errorData = await response.json(); 
                 console.log('Error data:', errorData);
-                const errorMessage = errorData.error; // Adjust this to match your actual error response structure
-                console.error('Error:', errorMessage);
-        
-                // Set the error message state and show the error message modal
+                const errorMessage = errorData.error;  
                 setErrorMessage(errorMessage);
                 setRole('');
                 setProject('');
@@ -70,7 +66,6 @@ const UserPrompt = (props) => {
                 setMessage(parsedResponseData);
                 handleNavigation(parsedResponseData);
             } else {
-                // Handle other errors (e.g., server error)
                 console.error('Server error');
                 setShowErrorMessage(true);
             }

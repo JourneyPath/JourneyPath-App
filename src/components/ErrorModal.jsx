@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ErrorModal = ({ errorMessage, onClose }) => {
   return (
     <div className="error-modal">
@@ -13,3 +11,4 @@ const ErrorModal = ({ errorMessage, onClose }) => {
 };
 
 export default ErrorModal;
+2
