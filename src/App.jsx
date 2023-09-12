@@ -55,7 +55,7 @@ function App() {
           {
             loggedIn ? 
             <>
-            <Link to='/dasboard' className="navLink"> Dashboard</Link>
+            <Link to='/dashboard' className="navLink"> Dashboard</Link>
             <Link to='/calendar' className="calendarLink"> Calendar</Link>
             <Link to='/' onClick={logout} className="navLink"> Sign Out</Link>
             </>:
@@ -73,7 +73,7 @@ function App() {
           <Route path='/login' element={<LoginForm setUser={(el) => setUser(el)} loggedIn={handleLoggedIn} />} />
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />
-          <Route path='/dasboard' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard uId={user.uid}/>} />
           <Route path='/calendar' element={<Calendar user={user}/>} />
           <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} />
         </Routes>

@@ -5,19 +5,10 @@ import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom"
 
 const Dashboard = () => {
-    const collectionRef = collection(db, auth.currentUser.uid);
     const [plans, setPlans] = useState([])
-    
-    const getPlans = () => {
-        plans.length? plans.map((plan,idx) => {
-            return (
-                <div key={idx}>{plan.title}</div>
-            )
-        })
-        : <div>You have no plans, create one!</div>
-    }
 
     useEffect(() => {
+        const collectionRef = collection(db, auth.currentUser.uid);
         getDocs(collectionRef)
             .then((snapshot) => {
                 let currentPlans = []

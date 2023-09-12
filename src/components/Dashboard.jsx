@@ -4,33 +4,27 @@ import { db, auth } from "../../functions/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom"
 
-const Dashboard = () => {
-    const collectionRef = collection(db, auth.currentUser.uid);
+const Dashboard = (props) => {
     const [plans, setPlans] = useState([])
     
-    const getPlans = () => {
-        plans.length? plans.map((plan,idx) => {
-            return (
-                <div key={idx}>{plan.title}</div>
-            )
-        })
-        : <div>You have no plans, create one!</div>
-    }
-
     useEffect(() => {
-        getDocs(collectionRef)
-            .then((snapshot) => {
-                let currentPlans = []
-                snapshot.docs.forEach((doc) => {
-                    currentPlans.push({...doc.data()})
+        
+        if(props.uId) {
+            const collectionRef = collection(db, props.uId);
+            getDocs(collectionRef)
+                .then((snapshot) => {
+                    let currentPlans = []
+                    snapshot.docs.forEach((doc) => {
+                        currentPlans.push({...doc.data()})
+                    })
+                    setPlans(currentPlans)
                 })
-                setPlans(currentPlans)
-            })
-            .catch(error => {
-                console.log(error)
-
-            })          
-    },[])
+                .catch(error => {
+                    console.log(error)
+    
+                })          
+        }
+    },[props.uId])
 
     return (
         <>
