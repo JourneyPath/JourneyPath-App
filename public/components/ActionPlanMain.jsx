@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router';
 import ActionPlanPDF from './PDFCreator';
 import { currentDate, currentTime } from '../../functions/date';
-import SaveButton from './SaveButton';
+import SaveButton from './SaveButton'
 
 const ActionPlanMain = ({ message: plan }) => {
     const location = useLocation();    
@@ -30,37 +30,11 @@ const ActionPlanMain = ({ message: plan }) => {
         setRemovedActionItems([...removedActionItems, { taskIndex, actionIndex }]);
     };
 
-    const addCompletedTag = (arg) => {
-        
-        arg.tasks.map(task => {
-            if (task?.action_items) {
-                for (let i = 0; i < task.action_items.length; i++) {
-                    if (task.action_items[i].completed === undefined) {
-                        let newItem = {"actionItem":task.action_items[i], "completed":false}
-                        task.action_items[i] = newItem
-                    }
-                }
-                
-            }
-        })
-        console.log(message.tasks)
-    }
-    const updateMessage = (taskIndex, actionIndex) => {
-        message.tasks[taskIndex].action_items[actionIndex].completed = !message.tasks[taskIndex].action_items[actionIndex].completed
-    }
-
-    useEffect(() => {
-        if (message) addCompletedTag(message)
-
-    },[])
     return (
-        <div className="action-plan-parent-wrapper">
-            <h1>Here's Your Action Plan!</h1>
-            <p>Note: This is just a general template designed to help you start your plan.  Users should modify their plan to meet their specific needs and comply with all constraints.</p>
-            <div className='actionPlan-Options'>
-                {/* <ActionPlanPDF message={message} className="action-plan-link"/> */}
-                <SaveButton message={message}/>
-            </div>
+        <div className="app">
+            <h1>Action Plan</h1>
+            <ActionPlanPDF message={message} />
+            <SaveButton message={message}/>
             <ul className="feed">
                 {message &&
                     Object.entries(message).map(([key, value], index) => (
@@ -98,13 +72,12 @@ const ActionPlanMain = ({ message: plan }) => {
                                                                     return (
                                                                         <li key={actionIndex}>
                                                                             <div className="action-item-wrapper">
-                                                                                <p>Action Item: {actionItem.actionItem}</p>
+                                                                                <p>Action Item: {actionItem}</p>
                                                                                 <div className="tasks-button-group">
                                                                                     <label className="checkbox-label" htmlFor={`action-item-${taskIndex}-${actionIndex}`}>
                                                                                         Completed?
                                                                                     </label>
                                                                                     <input
-                                                                                        onClick={() => updateMessage(taskIndex,actionIndex)}
                                                                                         className="checkbox-input"
                                                                                         type="checkbox"
                                                                                         id={`action-item-${taskIndex}-${actionIndex}`}

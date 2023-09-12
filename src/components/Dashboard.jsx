@@ -4,33 +4,39 @@ import { db, auth } from "../../functions/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom"
 
-const Dashboard = () => {
-    const collectionRef = collection(db, auth.currentUser.uid);
+const Dashboard = (props) => {
     const [plans, setPlans] = useState([])
+    //const [finished, setFinished] = useState([])
     
-    const getPlans = () => {
-        plans.length? plans.map((plan,idx) => {
-            return (
-                <div key={idx}>{plan.title}</div>
-            )
-        })
-        : <div>You have no plans, create one!</div>
-    }
+   
+    let finished = plans.map((plan) =>{
+        return plan.tasks.map(task => {
+        return task.action_items.every((actionItem) => actionItem.completed)
+        }).every(plan => plan === true) ? 1: 0
+    }).reduce((t,c) => t = t + c,0)
+
+    let openPlans = plans.length - finished
+    console.log('finished',finished)
+    
 
     useEffect(() => {
-        getDocs(collectionRef)
-            .then((snapshot) => {
-                let currentPlans = []
-                snapshot.docs.forEach((doc) => {
-                    currentPlans.push({...doc.data()})
+        
+        if(props.uId) {
+            const collectionRef = collection(db, props.uId);
+            getDocs(collectionRef)
+                .then((snapshot) => {
+                    let currentPlans = []
+                    snapshot.docs.forEach((doc) => {
+                        currentPlans.push({...doc.data()})
+                    })
+                    setPlans(currentPlans)
                 })
-                setPlans(currentPlans)
-            })
-            .catch(error => {
-                console.log(error)
-
-            })          
-    },[])
+                .catch(error => {
+                    console.log(error)
+    
+                })          
+        }
+    },[props.uId])
 
     return (
         <>
@@ -43,20 +49,29 @@ const Dashboard = () => {
                         </div>
                         <div className="statItem">
                             <h3>Plans Finished</h3>
-                            <div className="planStat">PH</div>
+                            <div className="planStat">{finished}</div>
                         </div>
                         <div className="statItem">
                             <h3>Plans Open</h3>
-                            <div className="planStat">PH</div>
+                            <div className="planStat">{openPlans}</div>
                         </div>
                     </div>
-                    <div>Completion Ratio %</div>
+                    <div>Completion Ratio {Math.round((finished/plans.length)*100)}%</div>
                 </div>
                 <nav className="existingPlans">
                     <h2>Existing plans</h2>
                     {plans.length? plans.map((plan,idx) => {
                         return (
-                            <Link to='/actionplan' state={{ message: plan }} key={idx} className="planButton">{plan.title}</Link>
+                            <Link to='/actionplan' state={{ message: plan }} key={idx} className="planButton">
+                                {Math.round(plan.tasks.reduce((total, task) => {
+                                    return (
+                                        total +
+                                        task.action_items.reduce((taskTotal, actionItem) => {
+                                        return taskTotal + (actionItem.completed ? 1 : 0);
+                                        }, 0)
+                                    );
+                                    }, 0)/plan.tasks.reduce((total, task) => total +
+                                    task.action_items.length,0)* 100)}% {plan.title}</Link>
                         )
                     })
                     : <div>You have no plans, create one!</div>}
