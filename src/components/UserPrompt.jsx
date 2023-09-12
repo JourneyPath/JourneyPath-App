@@ -1,6 +1,7 @@
 import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingModal from './LoadingModal';
+import ErrorModal from './ErrorModal';
 import ActionPlanMain from './ActionPlanMain';
 import SaveButton from './SaveButton';
 import { currentDate, currentTime } from '../../functions/date';
@@ -17,9 +18,16 @@ const UserPrompt = (props) => {
     const [ completionDate, setCompletionDate ] = useState('')
     const [ showModal, setShowModal ] = useState(false)
     const [loading, setLoading] = useState(false); 
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    
 
     const handleNavigation = (messageData) => {
         navigate('/actionplan', { state: { message: messageData } });
+      };
+
+    const handleErrorMessageClose = () => {
+        setShowErrorMessage(false);
       };
 
     const getMessages = async () => {
@@ -37,21 +45,60 @@ const UserPrompt = (props) => {
         }
         
         try {
-            const response = await fetch('http://localhost:5000/completions', options)
-            const data = await response.json()
-            console.log('this is the response on the front', data)
-            // console.log('this is the data.choices', data.choices[0].message.content)
-            const parsedResponseData = JSON.parse(data.choices[0].message.content)
-            console.log('this is the parsedResponseData', parsedResponseData)
-            setParsedResponse(parsedResponseData)
-            setMessage(parsedResponseData)
-            handleNavigation(parsedResponseData);
+            const response = await fetch('http://localhost:5000/completions', options);
+        
+            if (response.status === 400) {
+                const errorData = await response.json(); 
+                console.log('Error data:', errorData);
+                const errorMessage = errorData.error;  
+                setErrorMessage(errorMessage);
+                setRole('');
+                setProject('');
+                setStartDate('');
+                setCompletionDate('');
+                setShowErrorMessage(true);
+            } else if (response.ok) {
+                const data = await response.json();
+                console.log('this is the response on the front', data);
+                const parsedResponseData = JSON.parse(data.choices[0].message.content);
+                console.log('this is the parsedResponseData', parsedResponseData);
+                setParsedResponse(parsedResponseData);
+                setMessage(parsedResponseData);
+                handleNavigation(parsedResponseData);
+            } else {
+                console.error('Server error');
+                setShowErrorMessage(true);
+            }
         } catch (error) {
-            console.error(error)
+            console.error(error);
+            setRole('');
+            setProject('');
+            setStartDate('');
+            setCompletionDate('');
+            setShowErrorMessage(true);
         } finally {
-            setLoading(false); 
+            setLoading(false);
             setShowModal(false);
         }
+        
+        
+        
+        // try {
+        //     const response = await fetch('http://localhost:5000/completions', options)
+        //     const data = await response.json()
+        //     console.log('this is the response on the front', data)
+        //     // console.log('this is the data.choices', data.choices[0].message.content)
+        //     const parsedResponseData = JSON.parse(data.choices[0].message.content)
+        //     console.log('this is the parsedResponseData', parsedResponseData)
+        //     setParsedResponse(parsedResponseData)
+        //     setMessage(parsedResponseData)
+        //     handleNavigation(parsedResponseData);
+        // } catch (error) {
+        //     console.error(error)
+        // } finally {
+        //     setLoading(false); 
+        //     setShowModal(false);
+        // }
     }
 
 
@@ -116,6 +163,13 @@ const UserPrompt = (props) => {
             <div className="loading-modal">
                 <div className="loading-spinner"></div>
             </div>
+        )}
+
+        {showErrorMessage && (
+          <ErrorModal
+            errorMessage={errorMessage}
+            onClose={handleErrorMessageClose}
+          />
         )}
 
         {message ? (

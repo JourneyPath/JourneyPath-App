@@ -28,17 +28,13 @@ const Welcome = () => {
   };
 
   const handleConsent = () => {
-    setUserConsent(true); // Set userConsent to true when the user agrees
-    // Open the prompt modal only if the user has given consent
+    setUserConsent(true); 
     openPromptModal();
-    // Close the consent modal after opening the prompt modal
     closeConsentModal();
   };
+
   const handleConsentDisagree = () => {
-    // setUserConsent(false); // Set userConsent to true when the user agrees
-    // // Close the consent modal
     closeConsentModal();
-    // Open the prompt modal only if the user has given consent
   };
 
   return (
@@ -46,7 +42,7 @@ const Welcome = () => {
       <div className="welcome">
         <div className="welcome-headline">
           <h2>Welcome!</h2>
-          <p>Let us find the path for your journey.</p>
+          <p>Let us find a path for your journey.</p>
         </div>
         <p className="welcome-about-script">
           hyperDrive plans is a tool to help you accomplish your goals.
@@ -68,10 +64,12 @@ const Welcome = () => {
         shouldCloseOnOverlayClick={true} 
       >
         <div className="consent-screen">
-        <h3>Consent Agreement</h3>
-          <p>Please read and accept the terms and conditions before proceeding:</p>
-          <ul>
-            <li>Users agree that they will not use this application for any illegal purposes, including, but not limited to:</li>
+          <div className="consent-screen-header-section">
+            <h2>Consent Agreement</h2>
+            <h3>Please read the terms of use below.  Users must agree to these terms to use this service:</h3>
+          </div>
+          <div className="consent-screen-main-section">
+            <h4>Users agree that they will not use this application for any illegal or illicit purposes, including, but not limited to:</h4>
             <ul>
               <li>Child Sexual Abuse Material or any content that exploits or harms children</li>
               <li>Generation of hateful, harassing, or violent content</li>
@@ -89,11 +87,14 @@ const Welcome = () => {
               <li>Telling someone that they have or do not have a certain health condition, or providing instructions on how to cure or treat a health condition</li>
               <li>High-risk government decision-making</li>
             </ul>
-            <li>This application utilizes OpenAI's Services and users agree to comply with their terms of use, which can be found at <a href="https://openai.com/policies/usage-policies" target="_blank" rel="noopener noreferrer">https://openai.com/policies/usage-policies</a></li>
-          </ul>
-          {/* Add your consent content here */}
-          <button onClick={handleConsent}>I Agree</button>
-          <button onClick={handleConsentDisagree}>Back</button>
+            <p>
+              This application utilizes OpenAI's services and users agree to comply with their terms of use, which can be found at <a href="https://openai.com/policies/usage-policies" target="_blank" rel="noopener noreferrer">https://openai.com/policies/usage-policies</a>
+            </p>
+          </div>
+          <div className="welcome-modal-button-group">
+            <button onClick={handleConsent}>I Agree</button>
+            <button onClick={handleConsentDisagree}>Back</button>
+          </div>
         </div>
       </Modal>
 
