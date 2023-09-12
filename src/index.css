@@ -258,22 +258,22 @@ footer{
   background-color: #0056b3;
 }
 
-/* .container {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-} */
+}
 
-/* .formContainer {
+.formContainer {
   display: flex;
   flex-direction: column;
   padding: 4em;
   margin: 1em auto;
   background-color: #B3EFB2;
   border: .5em solid #7A9E7E;
-} */
+}
 
-/* .formContainer >h2 {
+ .formContainer >h2 {
   text-align: center;
   margin-bottom: 1em;
 }
@@ -289,7 +289,7 @@ footer{
   width:40%;
   align-self: center;
   margin-bottom: 1em auto;
-} */
+}
 
 /* ********************* ACTION PLAN VIEW STYLING  *********************/
 
