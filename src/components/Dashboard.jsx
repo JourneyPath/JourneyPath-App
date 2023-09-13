@@ -16,9 +16,7 @@ const Dashboard = (props) => {
     }).reduce((t,c) => t = t + c,0)
 
     let openPlans = plans.length - finished
-    console.log('finished',finished)
     
-
     useEffect(() => {
         
         if(props.uId) {
@@ -40,44 +38,49 @@ const Dashboard = (props) => {
 
     return (
         <>
-            <div className="dashContainer">
-                <div className="statsOuterContainer">
-                    <div className="statsContainer">
-                        <div className="statItem">
-                            <h3>Plans Created</h3>
-                            <p className="planStat">{plans.length}</p>
+            <div className="dashBoard">
+                <div className="dashContainer">
+                    <div className="statsOuterContainer">
+                        <div className="statsContainer">
+                            <div className="statItem">
+                                <h3>Plans Created</h3>
+                                <p className="planStat">{plans.length}</p>
+                            </div>
+                            <div className="statItem">
+                                <h3>Plans Finished</h3>
+                                <div className="planStat">{finished}</div>
+                            </div>
+                            <div className="statItem">
+                                <h3>Plans Open</h3>
+                                <div className="planStat">{openPlans}</div>
+                            </div>
                         </div>
-                        <div className="statItem">
-                            <h3>Plans Finished</h3>
-                            <div className="planStat">{finished}</div>
-                        </div>
-                        <div className="statItem">
-                            <h3>Plans Open</h3>
-                            <div className="planStat">{openPlans}</div>
-                        </div>
+                        <div>Completion Ratio {Math.round((finished/plans.length)*100)}%</div>
                     </div>
-                    <div>Completion Ratio {Math.round((finished/plans.length)*100)}%</div>
+                    <nav className="existingPlans">
+                        <h2>Existing plans</h2>
+                        {plans.length? plans.map((plan,idx) => {
+                            const completionPercentage = Math.round(plan.tasks.reduce((total, task) => {
+                                return (
+                                    total +
+                                    task.action_items.reduce((taskTotal, actionItem) => {
+                                    return taskTotal + (actionItem.completed ? 1 : 0);
+                                    }, 0)
+                                );
+                                }, 0)/plan.tasks.reduce((total, task) => total +
+                                task.action_items.length,0)* 100)
+                            return (
+                                <Link to='/actionplan' state={{ message: plan }} key={idx} className="planButton">
+                                    {completionPercentage}% {plan.title}
+                                    <div style={{ width:`${completionPercentage}%`}} className="planButtonContent"></div>
+                                </Link>
+                            )
+                        })
+                        : <div>You have no plans, create one!</div>}
+                    </nav>
                 </div>
-                <nav className="existingPlans">
-                    <h2>Existing plans</h2>
-                    {plans.length? plans.map((plan,idx) => {
-                        return (
-                            <Link to='/actionplan' state={{ message: plan }} key={idx} className="planButton">
-                                {Math.round(plan.tasks.reduce((total, task) => {
-                                    return (
-                                        total +
-                                        task.action_items.reduce((taskTotal, actionItem) => {
-                                        return taskTotal + (actionItem.completed ? 1 : 0);
-                                        }, 0)
-                                    );
-                                    }, 0)/plan.tasks.reduce((total, task) => total +
-                                    task.action_items.length,0)* 100)}% {plan.title}</Link>
-                        )
-                    })
-                    : <div>You have no plans, create one!</div>}
-                </nav>
-            </div>
             <UserPrompt />
+            </div>
         </>
     )
 }

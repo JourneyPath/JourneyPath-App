@@ -10,10 +10,14 @@ import { signOut, onAuthStateChanged } from 'firebase/auth'
 import 'firebase/auth';
 import Test from './components/test'
 import Calendar from './components/Calendar'
+import Modal from "react-modal";
+import HelpForm from './components/HelpForm'
+
 
 function App() {
   const [loggedIn, setloggedIn] = useState(false)
   const [user, setUser] = useState(false)
+  const [signOutModal, setSignOutModal]  = useState(false)
   onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, you can access user data here
@@ -35,13 +39,17 @@ function App() {
   const logout = async () => {
     try {
         await signOut(auth)
-        
+        setSignOutModal(true)
     } catch (error){
         console.error(error)
     }
-    setloggedIn(false)
-    window.alert("You have been logged out!")
   };
+
+  const closeSignOutModal = () => {
+    console.log('check')
+    setSignOutModal(false)
+    console.log(signOutModal)
+  }
   
   return (
     <>
@@ -76,9 +84,24 @@ function App() {
           <Route path='/dashboard' element={<Dashboard uId={user.uid}/>} />
           <Route path='/calendar' element={<Calendar user={user}/>} />
           <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} />
+          <Route path='/helpform' element={<HelpForm />} />
         </Routes>
+        <Modal
+          isOpen={signOutModal} 
+          onRequestClose={() => closeSignOutModal()}
+          contentLabel="SignOut Modal"
+          className="signOutMessage"
+          overlayClassName="modal-overlay"
+          shouldCloseOnOverlayClick={false} 
+        >
+        <div>You have been logged out!</div>
+        <button onClick={() => closeSignOutModal()}>Ok!</button>
+      </Modal>
       </main>
       <footer>
+        <div className='footerLinks'>
+        <Link to='/helpform' className="navLink"> Help Form</Link>
+        </div>
         <p>
         © 2023 hyperDrive Plans. All rights reserved.
         </p>
