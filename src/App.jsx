@@ -9,7 +9,8 @@ import { app as firebaseApp, auth} from "../functions/firebaseConfig"
 import { signOut, onAuthStateChanged } from 'firebase/auth'
 import 'firebase/auth';
 import Test from './components/test'
-import Calendar from './components/Calendar'
+import Contact from './components/Contact'
+// import Calendar from './components/Calendar'
 
 function App() {
   const [loggedIn, setloggedIn] = useState(false)
@@ -46,24 +47,29 @@ function App() {
   return (
     <>
       <nav>
-        <h1 className="navLink"> 
-          hyperDrive plans
+        <h1>
+          <Link to='/' className="navLink-header">hyperDrive</Link> 
         </h1>
         <ul>
-          {loggedIn ? <div className="loggedIn">Hi {user.displayName}</div> : null}
-          <Link to='/' className="navLink">Home</Link>
-          {
-            loggedIn ? 
+          {loggedIn ? (
             <>
-            <Link to='/dashboard' className="navLink"> Dashboard</Link>
-            <Link to='/calendar' className="calendarLink"> Calendar</Link>
-            <Link to='/' onClick={logout} className="navLink"> Sign Out</Link>
-            </>:
+              <div className="loggedIn">Hi {user.displayName}</div>
+              <li className="navDropdown">
+                <a className="navLink">☰</a>
+                <ul className="dropdownMenu">
+                  <li><Link to='/' className="navLink">Home</Link></li>
+                  <li><Link to='/dashboard' className="navLink">Dashboard</Link></li>
+                  <li><Link to='/' onClick={logout} className="navLink">Sign Out</Link></li>
+                </ul>
+              </li>
+            </>
+          ) : (
             <>
-              <Link to='/login' className="navLink">login</Link>
+              <Link to='/' className="navLink">Home</Link>
+              <Link to='/login' className="navLink">Login</Link>
               <Link to='/SignUp' className="navLink">Sign Up</Link>
             </>
-          }
+          )}
         </ul>
       </nav>
       <main>
@@ -74,11 +80,13 @@ function App() {
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
           <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />
           <Route path='/dashboard' element={<Dashboard uId={user.uid}/>} />
-          <Route path='/calendar' element={<Calendar user={user}/>} />
-          <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} />
+          {/* <Route path='/calendar' element={<Calendar user={user}/>} />
+          <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} /> */}
+          <Route path='/contact' element={<Contact />} />
         </Routes>
       </main>
       <footer>
+        <Link to='/contact' className="contact">About hyperDrive & Contact Information</Link>
         <p>
         © 2023 hyperDrive Plans. All rights reserved.
         </p>

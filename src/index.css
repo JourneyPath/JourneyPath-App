@@ -29,10 +29,30 @@ nav {
   align-items: center;
   align-content: center;
   background-color: #000000;
+  padding: 2em;
 }
 
-nav h1{
-  font-size: 2em;
+/* Add this CSS to your stylesheet */
+.navDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  background-color: #000000;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownMenu li {
+  list-style-type: none;
+}
+
+.navDropdown:hover .dropdownMenu {
+  display: block;
 }
 
 nav > ul {
@@ -47,19 +67,42 @@ nav > ul {
   text-decoration: none;
   color: rgb(220, 243, 244);
   font-weight: bolder;
+  font-size: 1.5em;
+}
+
+.navLink-header {
+  margin: 2em 1em;
+  padding: 5%;
+  text-decoration: none;
+  list-style: none;
+  text-decoration: none;
+  color: rgb(220, 243, 244);
+  /* font-weight: bolder; */
+  font-size: 2em;
+  text-shadow:
+    0 0 10px rgba(0, 0, 255, 0.6), 
+    0 0 20px rgba(200, 255, 255, 1), 
+    0 0 30px rgba(255, 255, 255, 1); 
 }
 
 footer{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   z-index: 2;;
   justify-content: center;
   align-items: center;
   background-color: #000000;
   color: rgb(220, 243, 244);
+  font-weight: bolder;
+  font-size: 1.5em;
   width: 100%;
-  height: 5vh;
+  height: 10vh;
+}
+
+.contact {
+  color:#FEC601;
+  margin-bottom: 1%;
 }
 
 /* ********************* WELCOME VIEW STYLING  *********************/
@@ -74,7 +117,7 @@ footer{
   flex-direction: column;
   position: relative;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
   height: 100vh;
   padding: 0;
@@ -85,21 +128,120 @@ footer{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: space-evenly;
   width: 100%;
-  height: 80%;
+  height: 100vh;
+  background: linear-gradient(to bottom,#070814,  #001f4d);
 }
 
-.welcome-headline {
-  color: #000000;
+/* .welcome h1 {
+  color: #FEC601;
+  border-radius: 10px;
+  padding: 2em;
+  margin-bottom: 5%;
+  width: 100%;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+} */
+
+.twinkle-text {
+  /* margin: 0.5em 1em; */
+  list-style: none;
+  text-decoration: none;
+  color: #FEC601;
+  /* font-weight: bolder; */
   font-size: 2em;
+  text-shadow:
+    0 0 10px rgba(0, 0, 255, 0.2), 
+    0 0 20px rgba(255, 255, 255, .2), 
+    0 0 30px rgba(255, 255, 255, .2); 
+}
+
+
+
+/* .welcome h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  height: 10%;
+  border: 2px solid black;
+  margin-bottom: 5%;
+  padding: 1em;
+} */
+
+/* display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 2em;
+height: 100%;
+background-color: #fff;
+box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.8);
+border-radius: 10px;
+font-size: .9em; */
+
+.welcome-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  /* margin-bottom: 3em; */
+  /* border: 2px solid #E8F1F2; */
+  /* background: linear-gradient(to top right, #070814 30%, #001f4d 80%); */
+  max-width: 60%;
+  min-height: 25vh;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 1);
+  color: #000000;
+  padding: 2em;
+  font-size: 2.5em;
+  font-weight: 500;
+  background: #E8F1F2;
+  /* background-color: #FCFCFC;  */
+}
+
+/* .welcome-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  color: #E8F1F2;
+  font-size: 1.5em;
   font-family: 'Poppins', serif;
   text-align: center;
   margin-bottom: 3em;
+  border: 2px solid #E8F1F2;;
+  background: linear-gradient(to bottom, #070814, #001f4d);
+  max-width: 60%;
+  min-height: 25vh;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  color: #E8F1F2;
+  padding: 2em;
+  font-size: 2em;
+  font-weight: 500;
+} */
+
+.welcome-headline h2 {
+  /* border: 2px solid red; */
+  width: 100%;
+}
+.welcome-about-script {
+  /* border: 2px solid green; */
+  width: 100%;
+  font-size: 2.5rem;
 }
 
-.welcome-about-script {
-  background-color: #075550;
+
+/* .welcome-about-script {
+  background-color: rgba(0, 42, 105, 0.8);
   max-width: 50%;
   min-height: 30%;
   border-radius: 10px;
@@ -113,20 +255,23 @@ footer{
   padding: 2em;
   margin-bottom: 3em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
-  color:rgb(220, 243, 244);
-}
+  color: white;
+} */
+
 
 .startButton {
   padding: 1em;
   background-color: #000000;
   color: rgb(220, 243, 244);
-  font-weight: bolder;
+  font-weight: 500;
+  font-size: 1.5em;
   width: 30%;
   margin: 1em auto;
   border: 1px solid #000000;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  box-shadow:  0 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .modal-background {
@@ -149,10 +294,9 @@ footer{
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 1000px; 
-  background-color: #075550;
+  background-color: transparent;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
   z-index: 9999;
 }
@@ -228,7 +372,7 @@ footer{
 }
 
 .welcome-modal-button-group button{
-  background-color: #075550;
+  background-color: #001f4d;
   color:rgb(220, 243, 244);
   border-radius: 5px;
   cursor: pointer;
@@ -323,6 +467,7 @@ footer{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100vh;
 }
 
 .formContainer {
@@ -727,4 +872,111 @@ footer{
   border: 1px solid black;
   border-radius: 4px;
   text-decoration: none;
+}
+
+
+/* ************ CONTACT & ABOUT PAGE VIEW STYLING ************* */
+
+.contact-parent-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+}
+
+.contact-about-section{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  border: 2px solid purple
+}
+
+.contact-techstack-section h1 {
+  text-align: center;
+  margin-bottom: 5%;
+  color: #ffffff;
+}
+
+.contact-techstack-section {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 25%;
+  border-radius: 15px;
+  background-color: #1a1a2e;
+  padding: 20px; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px; 
+  color: #ffffff; 
+}
+
+.contact-techstack-section p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.tech-stack-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height:100%
+}
+
+.frontEnd-about{
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  width: 40%;
+  height: 80%;
+  border: 2px solid #E8F1F2;
+  border-radius: 15px;
+  margin-right: 2%;
+}
+
+.frontEnd-about h4{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  margin: 10% 0;
+  color: #FEC601;
+}
+
+.frontEnd-about li{
+  margin-left: 10%;
+  width: 80%;
+}
+
+.backEnd-about{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 80%;
+  border: 2px solid #E8F1F2;
+  border-radius: 15px;
+  margin-left: 2%;
+}
+
+.backEnd-about h4{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  margin: 10% 0;
+  color: #FEC601;
+}
+
+.backEnd-about li{
+  margin-left: 10%;
+  width: 80%;
+}
+
+.contact-getintouch-section{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  border: 2px solid purple
 }

@@ -56,7 +56,7 @@ const ActionPlanMain = ({ message: plan }) => {
     return (
         <div className="action-plan-parent-wrapper">
             <h1>Here's Your Action Plan!</h1>
-            <p>Note: This is just a general template designed to help you start your plan.  Users should modify their plan to meet their specific needs and comply with all constraints.</p>
+            <p>Note: This is an AI-generated plan and is a general template.  Users should verify the plan meets their specific needs and complies with all regulations where you reside.</p>
             <div className='actionPlan-Options'>
                 {/* <ActionPlanPDF message={message} className="action-plan-link"/> */}
                 <SaveButton message={message}/>

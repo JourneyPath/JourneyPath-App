@@ -42,7 +42,7 @@ const LoginForm = (props) => {
         // Clear the form
         setEmail("");
         setPassword("");
-        // navigate("/dasboard");
+        navigate("/dashboard");
     };
 
     const signInWithGoogle = async () => {
