@@ -57,7 +57,7 @@ function App() {
               <li className="navDropdown">
                 <a className="navLink">☰</a>
                 <ul className="dropdownMenu">
-                  <li><Link to='/' className="navLink">Home</Link></li>
+                  {/* <li><Link to='/' className="navLink">Home</Link></li> */}
                   <li><Link to='/dashboard' className="navLink">Dashboard</Link></li>
                   <li><Link to='/' onClick={logout} className="navLink">Sign Out</Link></li>
                 </ul>
@@ -65,7 +65,7 @@ function App() {
             </>
           ) : (
             <>
-              <Link to='/' className="navLink">Home</Link>
+              {/* <Link to='/' className="navLink">Home</Link> */}
               <Link to='/login' className="navLink">Login</Link>
               <Link to='/SignUp' className="navLink">Sign Up</Link>
             </>
