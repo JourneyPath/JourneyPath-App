@@ -56,7 +56,7 @@ const ActionPlanMain = ({ message: plan }) => {
     return (
         <div className="action-plan-parent-wrapper">
             <h1>Here's Your Action Plan!</h1>
-            <p>Note: This is just a general template designed to help you start your plan.  Users should modify their plan to meet their specific needs and comply with all constraints.</p>
+            <h3 className='action-plan-note'>Note: This is an AI-generated plan and is a general template. Users should verify the plan meets their specific needs and complies with all regulations where you reside.</h3>
             <div className='actionPlan-Options'>
                 <ActionPlanPDF message={message} className="action-plan-link"/>
                 <SaveButton message={message}/>
@@ -77,7 +77,7 @@ const ActionPlanMain = ({ message: plan }) => {
                                                     <p>End Date: {task.end_date}</p>
 
                                                     <button className='toggle-button' onClick={() => toggleShowActionItems(taskIndex)}>
-                                                        {showActionItemsMap[taskIndex] ? '▼' : '▶'}
+                                                        {showActionItemsMap[taskIndex] ? 'Hide Action Items ▼' : 'Show Action Items ▶'}
                                                     </button>
 
                                                     {showActionItemsMap[taskIndex] &&
@@ -114,7 +114,7 @@ const ActionPlanMain = ({ message: plan }) => {
                                                                                         className="remove-button"
                                                                                         onClick={() => removeActionItem(taskIndex, actionIndex)}
                                                                                     >
-                                                                                        Remove Item
+                                                                                        Remove Item From Plan
                                                                                     </button>
                                                                                 </div>
                                                                             </div>

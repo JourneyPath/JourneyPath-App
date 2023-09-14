@@ -105,7 +105,7 @@ const UserPrompt = (props) => {
   return (
     <div className="user-prompt-parent-wrapper">
         <section className='user-prompt-main'>
-            <h1 className='getting-started-header'>Create a New Plan</h1>
+            <h1 className='getting-started-header'>Create a Plan</h1>
 
 
             <div className='user-prompt-bottom-section'>
@@ -115,7 +115,7 @@ const UserPrompt = (props) => {
                     <input
                         id="roleInput"
                         className="prompt-input"
-                        placeholder="e.g. 'retail manager', 'college student', 'actor', etc."
+                        placeholder="e.g. 'retail manager', 'woman','college student', '32 year old man', 'actor', etc."
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                         type="text"
@@ -153,7 +153,7 @@ const UserPrompt = (props) => {
                 </div>
 
 
-                <p className='info'>Powered by OpenAI ChatGPT 3.5-Turbo</p>
+                <p className='info'>Powered by OpenAI GPT</p>
 
             </div>
         </section>
