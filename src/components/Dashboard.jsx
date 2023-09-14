@@ -37,7 +37,7 @@ const Dashboard = (props) => {
     },[props.uId])
 
     return (
-        <>
+        
             <div className="dashBoard">
                 <div className="dashContainer">
                     <div className="statsOuterContainer">
@@ -81,7 +81,7 @@ const Dashboard = (props) => {
                 </div>
             <UserPrompt />
             </div>
-        </>
+        
     )
 }
 
