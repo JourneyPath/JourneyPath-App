@@ -58,7 +58,7 @@ const ActionPlanMain = ({ message: plan }) => {
             <h1>Here's Your Action Plan!</h1>
             <p>Note: This is just a general template designed to help you start your plan.  Users should modify their plan to meet their specific needs and comply with all constraints.</p>
             <div className='actionPlan-Options'>
-                {/* <ActionPlanPDF message={message} className="action-plan-link"/> */}
+                <ActionPlanPDF message={message} className="action-plan-link"/>
                 <SaveButton message={message}/>
             </div>
             <ul className="feed">

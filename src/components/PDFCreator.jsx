@@ -105,7 +105,7 @@ const ActionPlanPDF = ({ message }) => {
                                       key={actionIndex}
                                       style={styles.actionItem}
                                     >
-                                      - {actionItem}
+                                      - {actionItem.actionItem}
                                     </Text>
                                   )
                                 )}
