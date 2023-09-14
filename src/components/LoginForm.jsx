@@ -31,6 +31,7 @@ const LoginForm = (props) => {
                 props.loggedIn();
                 props.setUser(auth.currentUser); 
             }
+            navigate("/dashboard");
         })
         .catch((error) => {
             console.log(error);
@@ -42,7 +43,6 @@ const LoginForm = (props) => {
         // Clear the form
         setEmail("");
         setPassword("");
-        navigate("/dashboard");
     };
 
     const signInWithGoogle = async () => {
@@ -93,9 +93,8 @@ const LoginForm = (props) => {
                 required
               />
             </div>
-            
               <button type="submit">Login</button>
-              <p>or</p>
+              <p className="textCenter">or</p>
               <button className="google-signIn-button"onClick={signInWithGoogle}>Sign In With Google</button>
           </form>
           

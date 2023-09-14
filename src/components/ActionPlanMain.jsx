@@ -58,7 +58,7 @@ const ActionPlanMain = ({ message: plan }) => {
             <h1>Here's Your Action Plan!</h1>
             <h3 className='action-plan-note'>Note: This is an AI-generated plan and is a general template. Users should verify the plan meets their specific needs and complies with all regulations where you reside.</h3>
             <div className='actionPlan-Options'>
-                {/* <ActionPlanPDF message={message} className="action-plan-link"/> */}
+                <ActionPlanPDF message={message} className="action-plan-link"/>
                 <SaveButton message={message}/>
             </div>
             <ul className="feed">
