@@ -46,9 +46,9 @@ function App() {
     }
   };
 
-  const closeSignOutModal = () => {
-    setSignOutModal(false);
-  };
+  // const closeSignOutModal = () => {
+  //   setSignOutModal(false);
+  // };
 
   const handleLoggedIn = () => {
     setLoggedIn(true);
@@ -104,8 +104,8 @@ function App() {
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setLoggedIn(!loggedIn)}/>} />
           <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />
           <Route path='/dashboard' element={<Dashboard uId={user?.uid}/>} />
-          //<Route path='/calendar' element={<Calendar user={user}/>} />
-          //<Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} />
+          {/* <Route path='/calendar' element={<Calendar user={user}/>} />
+          <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} /> */}
           <Route path='/helpform' element={<HelpForm />} />
           <Route path='/contact' element={<Contact />} />
         </Routes>
