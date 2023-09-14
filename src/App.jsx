@@ -9,7 +9,7 @@ import { app as firebaseApp, auth} from "../functions/firebaseConfig"
 import { signOut, onAuthStateChanged } from 'firebase/auth'
 import 'firebase/auth';
 import Test from './components/test'
-import Contact from './components/Contact'
+import About from './components/About'
 // import Calendar from './components/Calendar'
 import Modal from 'react-modal';
 import HelpForm from './components/HelpForm'
@@ -66,6 +66,8 @@ function App() {
     setSignOutModal(false)
     console.log(signOutModal)
   }
+
+  console.log('this is user', user)
   
   return (
     <div className="appContainer">
@@ -74,15 +76,17 @@ function App() {
           <Link to='/' className="navLink-header">hyperDrive</Link> 
         </h1>
         <ul className='nav-user-dropdown-cluster'>
-          {loggedIn ? (
+          {user && user.emailVerified && loggedIn ? (
             <>
               <div className="loggedIn">Hi {user.displayName}</div>
               <li className="navDropdown">
                 <a className="navLink" onClick={handleDropdownClick}>☰</a>
                 <ul className={`dropdownMenu ${isDropdownOpen ? 'open' : ''}`}>
                   {/* <li><Link to='/' className="navLink">Home</Link></li> */}
+                  <li><Link to='/' className="navLink">Home</Link></li>
                   <li><Link to='/dashboard' className="navLink">Dashboard</Link></li>
-                  <li><Link to='/contact' className="navLink">About & Contact</Link></li>
+                  <li><Link to='/about' className="navLink">About</Link></li>
+                  <li><Link to='/helpform' className="navLink">Contact</Link></li>
                   <li><Link to='/' onClick={logout} className="navLink specialItem">Sign Out</Link></li>
                 </ul>
 
@@ -99,7 +103,7 @@ function App() {
       </nav>
       <main className='main'>
         <Routes>
-          <Route path='/' element={<Welcome />} />
+          <Route path='/' element={<Welcome user={user}/>} />
           <Route path='/test' element={<Test />} />
           <Route path='/login' element={<LoginForm setUser={(el) => setUser(el)} loggedIn={handleLoggedIn} />} />
           <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setLoggedIn(!loggedIn)}/>} />
@@ -108,7 +112,7 @@ function App() {
           {/* <Route path='/calendar' element={<Calendar user={user}/>} />
           <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} /> */}
           <Route path='/helpform' element={<HelpForm />} />
-          <Route path='/contact' element={<Contact />} />
+          <Route path='/about' element={<About />} />
         </Routes>
         
         <Modal
@@ -126,8 +130,9 @@ function App() {
       <footer>
         
         <div className='footerLinks'>
-        <Link to='/contact' className="contact">About hyperDrive & Contact Information</Link>
-        <Link to='/helpform' className="contact"> Help Form</Link>
+        <Link to='/about' className="contact">About hyperDrive</Link>
+        <Link to='/helpform' className="navLink"> Help Form</Link>
+        
         </div>
         
         <p>
