@@ -14,7 +14,7 @@ const Contact = () => {
         </p>
       </div>
       <div className="contact-techstack-section">
-        <h1>Technologies used for hyperDrive</h1>
+        <h1 className="techstack-title">Technologies used for hyperDrive</h1>
         <div className="tech-stack-wrapper">
           <ul className="frontEnd-about">
               <h4>Front-end</h4>
