@@ -2,10 +2,13 @@ import { useState } from "react";
 import Modal from "react-modal";
 import UserPrompt from "./UserPrompt";
 import ConsentModal from "./ConsentModal";
+import { useNavigate } from "react-router-dom";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
-const Welcome = () => {
+const Welcome = (props) => {
+  const navigate = useNavigate();
+  const loggedIn = props.user;
   const [showUserPrompt, setShowUserPrompt] = useState(false);
   const [showConsentModal, setShowConsentModal] = useState(false); // State for the consent modal
   const [userConsent, setUserConsent] = useState(true); // Set userConsent to true by default
@@ -38,6 +41,10 @@ const Welcome = () => {
     closeConsentModal();
   };
 
+  const navToSignUp = () => {
+    navigate("/signup");
+  };
+
   return (
     <div className="welcome-container">
       <div className="welcome">
@@ -51,9 +58,15 @@ const Welcome = () => {
             point to begin your journey and accomplish your goal!
           </p>
         </div>
-        <div className="startButton" onClick={openConsentModal}>
-          Click Here to Get Started
-        </div>
+        {loggedIn ? (
+          <div className="startButton" onClick={openConsentModal}>
+            Start A New Plan!
+          </div>
+        ) : (
+          <div className="startButton" onClick={navToSignUp}>
+            Click Here to Register & Get Started!
+          </div> 
+        )}
       </div>
 
       <ConsentModal

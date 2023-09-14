@@ -7,6 +7,7 @@ import {
   View,
 } from '@react-pdf/renderer';
 
+
 const styles = StyleSheet.create({
   page: {
     fontFamily: 'Helvetica',
@@ -54,8 +55,8 @@ const styles = StyleSheet.create({
   },
   downloadButton: {
     display: 'inline-block',
-    padding: '10px 20px',
-    background: '#075550', 
+    padding: '9px 20px',
+    background: '#007bff', 
     color: 'white', 
     textDecoration: 'none', 
     borderRadius: '5px', 
