@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Replace with your frontend URL
+    origin: 'https://journeypath-17d60.web.app/', // Replace with your frontend URL
   };
   
   app.use(cors(corsOptions));

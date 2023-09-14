@@ -25,7 +25,8 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user && user.emailVerified) {
+        console.log(user)
         setUser(user);
         setLoggedIn(true);
       } else {
@@ -69,7 +70,7 @@ function App() {
   console.log('this is user', user)
   
   return (
-    <>
+    <div className="appContainer">
       <nav>
         <h1>
           <Link to='/' className="navLink-header">hyperDrive</Link> 
@@ -131,6 +132,7 @@ function App() {
         <div className='footerLinks'>
         <Link to='/about' className="contact">About hyperDrive</Link>
         <Link to='/helpform' className="navLink"> Help Form</Link>
+        
         </div>
         
         <p>
@@ -138,7 +140,7 @@ function App() {
         </p>
         
       </footer>
-    </>
+    </div>
   )
 }
 
