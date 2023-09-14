@@ -50,6 +50,7 @@ const LoginForm = (props) => {
         await signInWithPopup(auth, googleProvider);
         props.loggedIn();
         props.setUser(auth.currentUser); 
+        navigate("/dashboard");
       } catch (error) {
         console.error(error);
       }

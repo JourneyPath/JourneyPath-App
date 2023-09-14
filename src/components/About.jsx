@@ -1,10 +1,8 @@
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
-const Contact = () => {
-  const emailAddress = ""
+const About = () => {
 
   return (
     <div className="contact-parent-wrapper">
@@ -45,7 +43,6 @@ const Contact = () => {
             <div className='ag-contact-links'>
               <Link to='https://www.linkedin.com/in/agreen01/' className="bioLink-LI"><FontAwesomeIcon icon={faLinkedin} /></Link>
               <Link to='https://github.com/agreen8911' className="bioLink-GH"><FontAwesomeIcon icon={faGithub} /></Link>
-              <Link to={`mailto:${emailAddress}`} className="bioLink-GH"><FontAwesomeIcon icon={faEnvelope} /></Link>
             </div>
           </div>
 
@@ -54,7 +51,6 @@ const Contact = () => {
             <div className='rh-contact-links'>
               <Link to='https://www.linkedin.com/in/r-hess/' className="bioLink-LI"><FontAwesomeIcon icon={faLinkedin} /></Link>
               <Link to='https://github.com/HRM0' className="bioLink-GH"><FontAwesomeIcon icon={faGithub} /></Link>
-              <Link to={`mailto:${emailAddress}`} className="bioLink-GH"><FontAwesomeIcon icon={faEnvelope} /></Link>
             </div>        
           </div>
         </div>
@@ -64,4 +60,4 @@ const Contact = () => {
   )
 }
 
-export default Contact
+export default About
