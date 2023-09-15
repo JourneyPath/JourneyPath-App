@@ -4,6 +4,7 @@ import cors from 'cors';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
+import { AbortController } from 'abort-controller'
 
 dotenv.config();
 const API_Key = process.env.VITE_API_KEY
