@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Modal from "react-modal";
 import UserPrompt from "./UserPrompt";
 import ConsentModal from "./ConsentModal";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../functions/firebaseConfig";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
@@ -14,22 +13,6 @@ const Welcome = (props) => {
   const [showUserPrompt, setShowUserPrompt] = useState(false);
   const [showConsentModal, setShowConsentModal] = useState(false); // State for the consent modal
   const [userConsent, setUserConsent] = useState(true); // Set userConsent to true by default
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(
-      (authUser) => {
-        setUser(authUser);
-      },
-      (error) => {
-        console.error("Firebase Auth Observer Error:", error);
-      }
-    );
-  
-    // Clean up the observer when the component unmounts
-    return () => {
-      unsubscribe();
-    };
-  }, []);
   
 
   const openConsentModal = () => {

@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import OpenAI from 'openai';
 
 dotenv.config();
-const API_Key = process.env.OPENAI_API_KEY
+const API_Key = process.env.VITE_API_KEY
 // const VITE_GOOGLE_CALENDAR_CLIENT_ID = process.env.VITE_GOOGLE_CALENDAR_CLIENT_ID
 // const VITE_GOOGLE_CALENDAR_CLIENT_SECRET = process.env.VITE_GOOGLE_CALENDAR_CLIENT_SECRET
 // const VITE_GOOGLE_CALENDAR_REDIRECT_URL = process.env.VITE_GOOGLE_CALENDAR_REDIRECT_URL
@@ -19,7 +19,7 @@ app.use(express.json());
 //app.use(cors());
 
 const corsOptions = {
-    origin: 'https://journeypath-17d60.web.app', // Replace with your frontend URL
+    origin: 'http://localhost:5173', // Replace with your frontend URL
   };
   
   app.use(cors(corsOptions));
