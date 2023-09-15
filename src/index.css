@@ -900,6 +900,7 @@ footer {
 }
 
 /* Action item styles */
+
 .action-item-wrapper {
   display: flex;
   justify-content: space-between;
@@ -908,6 +909,7 @@ footer {
 }
 
 .action-item-wrapper p {
+  display: flex;
   margin: 0;
 }
 
@@ -963,7 +965,7 @@ footer {
   align-items: center;
   gap: 1em;
   margin-top: 10px;
-  width: 20%;
+  
 }
 
 /* Role label styles */
