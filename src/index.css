@@ -38,8 +38,9 @@ html, body, #root {
   height: 100%;
 }
 
-.main{
-  height: 100%;
+.main, main{
+  display:flex;
+  justify-content: center;
 }
 
 
