@@ -1270,7 +1270,7 @@ footer {
   border-radius: 15px;
   box-shadow: 0px 2px 10px 10px rgba(255, 255, 255, .5);
   /* margin-right: 2%; */
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 
 }
 
@@ -1286,6 +1286,7 @@ footer {
 .frontEnd-about li{
   margin-left: 15%;
   width: 80%;
+  height: 15%
 }
 
 .backEnd-about{
@@ -1297,7 +1298,7 @@ footer {
   border-radius: 15px;
   box-shadow: 0px 2px 10px 10px rgba(255, 255, 255, .5);
   /* margin-left: 2%; */
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .backEnd-about h4{
@@ -1312,7 +1313,9 @@ footer {
 .backEnd-about li{
   margin-left: 15%;  
   width: 80%;
+  height: 10%;
 }
+
 
 .contact-getintouch-section{
   display: flex;
