@@ -48,8 +48,9 @@ const LoginForm = (props) => {
     const signInWithGoogle = async () => {
       try {
         await signInWithPopup(auth, googleProvider);
+        auth.currentUser.emailVerified = true;
         props.loggedIn();
-        props.setUser(auth.currentUser); 
+        props.setUser(auth.currentUser);
         navigate("/dashboard");
       } catch (error) {
         console.error(error);
