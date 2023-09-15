@@ -122,7 +122,7 @@ const SignUp = (props) => {
       <RegistrationModal
         isOpen={isSuccessModalOpen}
         onClose={closeSuccessModal}
-        message="Sign up successful! Please check your email for a verification link."
+        message="Sign up successful! Please check your email for a verification link. You will be directed to the home page.  Once you have verified your email, you can log in and start using hyperDrive!"
       />
     </div>
   );
