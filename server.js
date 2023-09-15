@@ -1,17 +1,16 @@
 
 import express from 'express';
 import cors from 'cors';
-import { google } from 'googleapis';
+// import { google } from 'googleapis';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
-import { AbortController } from 'abort-controller'
 
 dotenv.config();
 const API_Key = process.env.OPENAI_API_KEY
-const VITE_GOOGLE_CALENDAR_CLIENT_ID = process.env.VITE_GOOGLE_CALENDAR_CLIENT_ID
-const VITE_GOOGLE_CALENDAR_CLIENT_SECRET = process.env.VITE_GOOGLE_CALENDAR_CLIENT_SECRET
-const VITE_GOOGLE_CALENDAR_REDIRECT_URL = process.env.VITE_GOOGLE_CALENDAR_REDIRECT_URL
-const VITE_GOOGLE_CALENDAR_API_KEY = process.env.VITE_GOOGLE_CALENDAR_API_KEY
+// const VITE_GOOGLE_CALENDAR_CLIENT_ID = process.env.VITE_GOOGLE_CALENDAR_CLIENT_ID
+// const VITE_GOOGLE_CALENDAR_CLIENT_SECRET = process.env.VITE_GOOGLE_CALENDAR_CLIENT_SECRET
+// const VITE_GOOGLE_CALENDAR_REDIRECT_URL = process.env.VITE_GOOGLE_CALENDAR_REDIRECT_URL
+// const VITE_GOOGLE_CALENDAR_API_KEY = process.env.VITE_GOOGLE_CALENDAR_API_KEY
 
 const PORT = 5000;
 const app = express();
