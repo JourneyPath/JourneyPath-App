@@ -131,7 +131,7 @@ function App() {
         
         <div className='footerLinks'>
         <Link to='/about' className="contact">About hyperDrive</Link>
-        <Link to='/helpform' className="navLink"> Help Form</Link>
+        <Link to='/helpform' className="contact"> Help Form</Link>
         
         </div>
         

@@ -38,8 +38,9 @@ html, body, #root {
   height: 100%;
 }
 
-.main{
-  height: 100%;
+.main, main{
+  display:flex;
+  justify-content: center;
 }
 
 
@@ -786,7 +787,7 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  
 }
 
 .action-plan-note{
