@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import UserPrompt from "./UserPrompt";
 import ConsentModal from "./ConsentModal";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../functions/firebaseConfig";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
 
 const Welcome = (props) => {
   const navigate = useNavigate();
   const loggedIn = props.user;
+  const [user, setUser] = useState(null); // Initialize user state
   const [showUserPrompt, setShowUserPrompt] = useState(false);
   const [showConsentModal, setShowConsentModal] = useState(false); // State for the consent modal
   const [userConsent, setUserConsent] = useState(true); // Set userConsent to true by default
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(
+      (authUser) => {
+        setUser(authUser);
+      },
+      (error) => {
+        console.error("Firebase Auth Observer Error:", error);
+      }
+    );
+  
+    // Clean up the observer when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  
 
   const openConsentModal = () => {
     setShowConsentModal(true);
@@ -58,14 +77,14 @@ const Welcome = (props) => {
             point to begin your journey and accomplish your goal!
           </p>
         </div>
-        {loggedIn ? (
+        {user && user.emailVerified && loggedIn ? (
           <div className="startButton" onClick={openConsentModal}>
             Start A New Plan!
           </div>
         ) : (
-          <div className="startButton" onClick={navToSignUp}>
-            Click Here to Register & Get Started!
-          </div> 
+            <div className="startButton" onClick={navToSignUp}>
+              Click Here to Register & Get Started!
+            </div> 
         )}
       </div>
 
