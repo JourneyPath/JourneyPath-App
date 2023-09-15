@@ -4,78 +4,145 @@ import {Routes, Route, Link} from "react-router-dom"
 import Welcome from './components/Welcome'
 import ActionPlanMain from './components/ActionPlanMain'
 import Dashboard from './components/Dashboard'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { app as firebaseApp, auth} from "../functions/firebaseConfig"
 import { signOut, onAuthStateChanged } from 'firebase/auth'
 import 'firebase/auth';
 import Test from './components/test'
+import About from './components/About'
+// import Calendar from './components/Calendar'
+import Modal from 'react-modal';
+import HelpForm from './components/HelpForm'
+
+
+Modal.setAppElement('#root'); 
 
 function App() {
-  const [loggedIn, setloggedIn] = useState(false)
-  const [user, setUser] = useState(false)
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in, you can access user data here
-        setUser(user)
-        setloggedIn(true)
-        console.log(user.uid); // User ID
-        console.log(user.email); // User's email
-        console.log(user.displayName); // User's display name
-    } else {
-        // User is signed out
-        setloggedIn(false)
-    }
-  });
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
+  const [signOutModal, setSignOutModal] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleLoggedIn = () => {
-    setloggedIn(true); 
-  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user && user.emailVerified) {
+        console.log(user)
+        setUser(user);
+        setLoggedIn(true);
+      } else {
+        setUser(null);
+        setLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const logout = async () => {
     try {
-        await signOut(auth)
-        
-    } catch (error){
-        console.error(error)
+      await signOut(auth);
+      setSignOutModal(true);
+    } catch (error) {
+      console.error(error);
     }
-    setloggedIn(false)
-    window.alert("You have been logged out!")
   };
+
+  // const closeSignOutModal = () => {
+  //   setSignOutModal(false);
+  // };
+
+  const handleLoggedIn = () => {
+    setLoggedIn(true);
+  };
+
+  const handleDropdownClick = () => {
+    console.log('drop down event firing')
+    setDropdownOpen(!isDropdownOpen); 
+
+  };
+
+  const closeSignOutModal = () => {
+    console.log('check')
+    setSignOutModal(false)
+    console.log(signOutModal)
+  }
+
+  console.log('this is user', user)
   
   return (
-    <>
+    <div className="appContainer">
       <nav>
-        <div className="navLink"> 
-          JourneyPath
-        </div>
-        <ul>
-          {loggedIn ? <div className="loggedIn">Hi {user.displayName}</div> : <div className="loggedIn">Welcome!</div>}
-          <Link to='/' className="navLink">Home</Link>
-          {
-            loggedIn ? 
+        <h1>
+          <Link to='/' className="navLink-header">hyperDrive</Link> 
+        </h1>
+        <ul className='nav-user-dropdown-cluster'>
+          {user && user.emailVerified && loggedIn ? (
             <>
-            <Link to='/dasboard' className="navLink"> Dashboard</Link>
-            <Link to='/' onClick={logout} className="navLink"> Sign Out</Link>
-            </>:
+              <div className="loggedIn">Hi {user.displayName}</div>
+              <li className="navDropdown">
+                <a className="navLink" onClick={handleDropdownClick}>☰</a>
+                <ul className={`dropdownMenu ${isDropdownOpen ? 'open' : ''}`}>
+                  {/* <li><Link to='/' className="navLink">Home</Link></li> */}
+                  <li><Link to='/' className="navLink">Home</Link></li>
+                  <li><Link to='/dashboard' className="navLink">Dashboard</Link></li>
+                  <li><Link to='/about' className="navLink">About</Link></li>
+                  <li><Link to='/helpform' className="navLink">Contact</Link></li>
+                  <li><Link to='/' onClick={logout} className="navLink specialItem">Sign Out</Link></li>
+                </ul>
+
+              </li>
+            </>
+          ) : (
             <>
-              <Link to='/login' className="navLink">login</Link>
+              {/* <Link to='/' className="navLink">Home</Link> */}
+              <Link to='/login' className="navLink">Login</Link>
               <Link to='/SignUp' className="navLink">Sign Up</Link>
             </>
-          }
+          )}
         </ul>
       </nav>
-      <main>
+      <main className='main'>
         <Routes>
-          <Route path='/' element={<Welcome />} />
+          <Route path='/' element={<Welcome user={user}/>} />
           <Route path='/test' element={<Test />} />
           <Route path='/login' element={<LoginForm setUser={(el) => setUser(el)} loggedIn={handleLoggedIn} />} />
-          <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setloggedIn(!loggedIn)}/>} />
+          <Route path='/SignUp' element={<SignUp setUser={(el) => setUser(el)} loggedIn={() => setLoggedIn(!loggedIn)}/>} />
           <Route path='/actionplan' element={<ActionPlanMain user={user}/>} />
-          <Route path='/dasboard' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard uId={user?.uid}/>} />
+          {/* <Route path='/calendar' element={<Calendar user={user}/>} />
+          <Route path="/calendar/redirect" element={<Calendar user={user} isAuthenticated={true} />} /> */}
+          <Route path='/helpform' element={<HelpForm />} />
+          <Route path='/about' element={<About />} />
         </Routes>
+        
+        <Modal
+          isOpen={signOutModal} 
+          onRequestClose={() => closeSignOutModal()}
+          contentLabel="SignOut Modal"
+          className="formContainer"
+          overlayClassName="modal-overlay"
+          shouldCloseOnOverlayClick={false} 
+        >
+          <div>You have been logged out!</div>
+          <button onClick={() => closeSignOutModal()}>Ok!</button>
+        </Modal>
       </main>
-    </>
+      <footer>
+        
+        <div className='footerLinks'>
+        <Link to='/about' className="contact">About hyperDrive</Link>
+        <Link to='/helpform' className="contact"> Help Form</Link>
+        
+        </div>
+        
+        <p>
+        © 2023 hyperDrive Plans. All rights reserved.
+        </p>
+        
+      </footer>
+    </div>
   )
 }
 
 export default App
+

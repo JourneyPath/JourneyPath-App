@@ -5,8 +5,10 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword,
          signInWithPopup, 
        } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = (props) => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState('')
@@ -29,6 +31,7 @@ const LoginForm = (props) => {
                 props.loggedIn();
                 props.setUser(auth.currentUser); 
             }
+            navigate("/dashboard");
         })
         .catch((error) => {
             console.log(error);
@@ -47,6 +50,7 @@ const LoginForm = (props) => {
         await signInWithPopup(auth, googleProvider);
         props.loggedIn();
         props.setUser(auth.currentUser); 
+        navigate("/dashboard");
       } catch (error) {
         console.error(error);
       }
@@ -90,9 +94,8 @@ const LoginForm = (props) => {
                 required
               />
             </div>
-            
               <button type="submit">Login</button>
-              <p>or</p>
+              <p className="textCenter">or</p>
               <button className="google-signIn-button"onClick={signInWithGoogle}>Sign In With Google</button>
           </form>
           

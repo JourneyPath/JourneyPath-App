@@ -17,10 +17,10 @@ const PORT = 5000;
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 
 const corsOptions = {
-    origin: 'https://journeypath-17d60.web.app/', // Replace with your frontend URL
+    origin: 'https://journeypath-17d60.web.app', // Replace with your frontend URL
   };
   
   app.use(cors(corsOptions));
