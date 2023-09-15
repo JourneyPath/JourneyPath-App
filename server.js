@@ -7,7 +7,7 @@ import OpenAI from 'openai';
 import { AbortController } from 'abort-controller'
 
 dotenv.config();
-const API_Key = process.env.VITE_API_KEY
+const API_Key = process.env.OPENAI_API_KEY
 const VITE_GOOGLE_CALENDAR_CLIENT_ID = process.env.VITE_GOOGLE_CALENDAR_CLIENT_ID
 const VITE_GOOGLE_CALENDAR_CLIENT_SECRET = process.env.VITE_GOOGLE_CALENDAR_CLIENT_SECRET
 const VITE_GOOGLE_CALENDAR_REDIRECT_URL = process.env.VITE_GOOGLE_CALENDAR_REDIRECT_URL

@@ -45,7 +45,7 @@ const UserPrompt = (props) => {
         }
         
         try {
-            const response = await fetch('https://journeypathbackend.onrender.com', options);
+            const response = await fetch('https://journeypathbackend.onrender.com/completions', options);
         
             if (response.status === 400) {
                 const errorData = await response.json(); 
