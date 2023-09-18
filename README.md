@@ -9,6 +9,8 @@ hyperDrive is a site we designed, built, and deployed to help users overcome pla
 
 Deployed Site:  https://journeypath-17d60.web.app/ 
 
+Please note:  Commented-out code has been left in our resository as this is a ongoing project.
+
  
 ## Contributors
 
