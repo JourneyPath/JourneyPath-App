@@ -39,7 +39,7 @@ const About = () => {
         
         <div className='contact-wrapper'>
           <div className='ag-contact'>
-            <p>Adam Green, Co-Builder</p>
+            <p>Adam Green <span className='contact-role'>Co-Builder</span></p>
             <div className='ag-contact-links'>
               <Link to='https://www.linkedin.com/in/agreen01/' className="bioLink-LI"><FontAwesomeIcon icon={faLinkedin} /></Link>
               <Link to='https://github.com/agreen8911' className="bioLink-GH"><FontAwesomeIcon icon={faGithub} /></Link>
@@ -47,7 +47,7 @@ const About = () => {
           </div>
 
           <div className='rh-contact'>
-            <p>Rob Hess, Co-Builder</p>
+            <p>Rob Hess <span className='contact-role'>Co-Builder</span></p>
             <div className='rh-contact-links'>
               <Link to='https://www.linkedin.com/in/r-hess/' className="bioLink-LI"><FontAwesomeIcon icon={faLinkedin} /></Link>
               <Link to='https://github.com/HRM0' className="bioLink-GH"><FontAwesomeIcon icon={faGithub} /></Link>

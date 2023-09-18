@@ -50,7 +50,7 @@ const Welcome = (props) => {
   return (
     <div className="welcome-container">
       <div className="welcome">
-      <h1> <span className="twinkle-text">Activate the hyperDrive and achieve your goals...</span></h1>
+      <h1 className="twinkle-text"> Activate the hyperDrive and achieve your goals...</h1>
         <div className="welcome-headline"> 
           <h2>Welcome!</h2>
           <p className="welcome-about-script">
