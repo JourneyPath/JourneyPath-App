@@ -19,7 +19,7 @@ body {
 /* Apply styles to the root element (assuming it's an HTML element like <html>) */
 html, body, #root {
   width: 100%;
-  height: 100%;
+  height:100%;
   padding: 0;
   background-color: #E8F1F2;
 }
@@ -42,7 +42,6 @@ html, body, #root {
   display:flex;
   justify-content: center;
   width:100%;
-  height:100%;
 }
 
 
@@ -220,7 +219,7 @@ footer {
 }
 
 @media (max-width: 800px) {
-  footer {
+  /* footer {
     display: flex;
     flex-direction: column; 
     justify-content: center; 
@@ -229,7 +228,7 @@ footer {
     width: 100vw;
     font-size: 1em;
     padding: 2% 0;
-  }
+  } */
 }
 
 .contact {
@@ -257,7 +256,7 @@ footer {
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  height: 100%;
+  height: 90vh;
   padding: 0;
   margin: 0;
 }
@@ -653,7 +652,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
+  height: stretch;
 }
 
 .formContainer {
@@ -1202,7 +1201,6 @@ footer {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 100%;
   padding: 1em;
   margin: auto;
 }
