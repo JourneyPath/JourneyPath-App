@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user && user.emailVerified) {
-        console.log(user)
+        // console.log(user)
         setUser(user);
         setLoggedIn(true);
       } else {
@@ -56,18 +56,17 @@ function App() {
   };
 
   const handleDropdownClick = () => {
-    console.log('drop down event firing')
     setDropdownOpen(!isDropdownOpen); 
 
   };
 
   const closeSignOutModal = () => {
-    console.log('check')
+    // console.log('check')
     setSignOutModal(false)
-    console.log(signOutModal)
+    // console.log(signOutModal)
   }
 
-  console.log('this is user', user)
+  // console.log('this is user', user)
   
   return (
     <div className="appContainer">

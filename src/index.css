@@ -1373,7 +1373,6 @@ footer {
   bottom: 0;
   justify-content: space-evenly;
   width: 100%;
-  /* margin-top: 2%; */
   background-color: #fff;
 }
 .rh-contact{
@@ -1407,6 +1406,10 @@ footer {
   background-color: #fff;
 }
 
+.contact-role{
+  color: #fec601;
+}
+
 .bioLink-LI{
   color:#0a66c2;
 }
@@ -1429,6 +1432,10 @@ footer {
     height: fit-content;
   }
 
+  .contact-getintouch-section{
+    width:100%;
+  }
+
   .contact-about-section {
     flex-direction: column; /* or any other desired value */
     justify-content: center; /* or any other desired value */
@@ -1437,6 +1444,7 @@ footer {
     min-height: fit-content;
     font-size: .75rem;
   }
+
 
   .contact-about-section h1 {
     font-size: 1.25em; 
@@ -1541,10 +1549,12 @@ footer {
   
   .ag-contact{
     text-align: center;
+    height: stretch;
   }
 
   .rh-contact{
     text-align: center;
+    height: stretch;
   }
 }
 
