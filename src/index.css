@@ -683,7 +683,7 @@ footer {
 }
 
 .formContainer >button {
-  width:40%;
+  width:100%;
   align-self: center;
   margin-bottom: 1em auto;
 }
