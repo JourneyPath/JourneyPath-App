@@ -14,7 +14,7 @@ const HelpForm = () => {
 
   return (
     <div className="container">
-      <form action="https://formsubmit.co/pythonthrowaway01342@gmail.com" method="POST" className="formContainer">
+      <form action="https://formsubmit.co/2aebd82ee1e4cb23853d4fb7e82fc782" method="POST" className="formContainer">
           <h2>Contact Form</h2>
           <div className="formElement">
             <label>Name:</label>
