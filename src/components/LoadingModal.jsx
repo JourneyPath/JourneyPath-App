@@ -9,7 +9,7 @@ const LoadingModal = ({ isOpen }) => {
         overlayClassName="loading-modal-overlay"
       >
         <div className="modal-content">
-          <p>Loading...</p>
+          <p>Loading...This takes a minute, so please be patient while we create your tailored plan!</p>
         </div>
       </Modal>
     );
