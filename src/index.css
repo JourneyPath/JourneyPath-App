@@ -219,16 +219,9 @@ footer {
 }
 
 @media (max-width: 800px) {
-  /* footer {
-    display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    text-align: center;
-    width: 100vw;
-    font-size: 1em;
-    padding: 2% 0;
-  } */
+  footer p {
+    font-size: .95em;
+  }
 }
 
 .contact {
