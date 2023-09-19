@@ -230,6 +230,10 @@ footer {
     font-size: 1em;
     padding: 2% 0;
   }
+
+  footer p {
+      font-size: .95em;
+    }
 }
 
 .contact {
